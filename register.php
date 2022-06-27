@@ -114,7 +114,6 @@
                 <h2>ลงทะเบียน</h2>
                 <p>กรุณากรอกแบบฟอร์มนี้เพื่อสร้างบัญชี</p>
                 
-<<<<<<< HEAD
                     <?php 
                         if(!empty($password_err)){
                             echo '<div class="alert alert-danger">' . $password_err . '</div>';
@@ -128,7 +127,6 @@
                     <div class="form-group">
                         <label >นามสกุล</label>
                         <input type="text" class="form-control" id="Lastname" name="Lastname" aria-describedby="emailHelp" placeholder="นามสกุล" required>
-=======
                 <form method="post">
                     <div class="form-row">
                         <div class="form-group col-md-6">
@@ -139,7 +137,6 @@
                             <label >นามสกุล</label>
                             <input type="text" class="form-control" id="Lastname" name="Lastname" aria-describedby="emailHelp" placeholder="นามสกุล">
                         </div>
->>>>>>> 7424b9ad28c7ec77c426f8c952e6e51c2710ddf2
                     </div>
 
                     <div class="form-group">
@@ -150,7 +147,6 @@
                         <label >อีเมล</label>
                         <input type="email" class="form-control" id="Email" name="Email" aria-describedby="emailHelp" placeholder="อีเมล" required>
                     </div>
-<<<<<<< HEAD
                     <div class="form-group">
                         <label >รหัสผ่าน</label>
                         <input type="password" class="form-control" id="Password" name="Password" placeholder="รหัสผ่าน" required>
@@ -167,7 +163,6 @@
                     <div class="form-group">
                         <label >ตำแหน่ง</label>
                         <input type="text" class="form-control" id="Rank" name="Rank" placeholder="ตำแหน่ง" required>
-=======
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
@@ -189,7 +184,6 @@
                             <label >ตำแหน่ง</label>
                             <input type="text" class="form-control" id="Rank" name="Rank" placeholder="ตำแหน่ง">
                         </div>
->>>>>>> 7424b9ad28c7ec77c426f8c952e6e51c2710ddf2
                     </div>
 
                     <button type="submit" class="btn btn-primary">ยืนยัน</button><br><br>
