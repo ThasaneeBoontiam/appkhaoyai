@@ -1,27 +1,68 @@
 <?php
-    require_once "includes/connect.php";
-    if(isset($_POST)& !empty($_POST)){
-        $Email = mysqli_real_escape_string($conn, $_POST['Email']);
-        $sql = "SELECT * FROM `tb_user` WHERE Email = '$Email'";
-        $query = mysqli_query($conn, $sql);
-        $count = mysqli_num_rows($query);
-        if($count == 1){
-            $q = mysqli_fetch_assoc($query);
-            $password = $q['password'];
-            $to = $q['Email'];
-            $subject = "Your Recovered Password";
 
-            $message = "Please use this password to login " . $password;
-            $headers = "From : admin@phpflow.com";////
-            if(mail($to, $subject, $message, $headers)){
-                echo "Your Password has been sent to your email id";
-            }else{
-                echo "Failed to Recover your password, try again";
+    require_once "includes/connect.php";
+    $username = "";
+    $username_err = $user_err = "";
+
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+ 
+        // Check if username is empty
+        if(empty(trim($_POST["username"]))){
+            $username_err = "Please enter username.";
+        } else{
+            $username = trim($_POST["username"]);
+        }
+
+        if(empty($username_err)){
+            // Prepare a select statement
+            $sql = "SELECT `First_name`, `Last_name`, `UserName`, `Password`, `Agency`, `Rank`, `Status` FROM tb_user WHERE UserName = ?";
+    
+            if($stmt = mysqli_prepare($conn, $sql)){
+                // Bind variables to the prepared statement as parameters
+                mysqli_stmt_bind_param($stmt, "s", $param_username);
+                
+                // Set parameters
+                $param_username = $username;
+                
+                // Attempt to execute the prepared statement
+                if(mysqli_stmt_execute($stmt)){
+                    // Store result
+                    mysqli_stmt_store_result($stmt);
+                    
+                    // Check if username exists, if yes then verify password
+                    if(mysqli_stmt_num_rows($stmt) == 1){                    
+                        // Bind result variables
+                        mysqli_stmt_bind_result($stmt, $First_name, $Last_name, $username, $hash_password, $Agency, $Rank, $status);
+                        if(mysqli_stmt_fetch($stmt)){
+                            
+                                session_start();
+                                
+                                // Store data in session variables
+                                
+                                $_SESSION["username"] = $username;
+                                                         
+                                
+                                // Redirect user to welcome page
+                                header("location: reset_pass.php");
+                                // Password is correct, so start a new session
+                            
+                        }
+                    } else{
+                        // Username doesn't exist, display a generic error message
+                        $user_err = "ชื่อผู้ใช้ไม่ถูกต้อง";
+                    }
+                } else{
+                    echo "Oops! Something went wrong. Please try again later.";
+                }
+    
+                // Close statement
+                mysqli_stmt_close($stmt);
             }
-        }else{
-            echo "Email does not exist in database";
         }
     }
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -44,18 +85,23 @@
                 <div class="card-body">
                     <div class="container">
                         <h3>ลืมรหัสผ่าน?</h3>
-                            <form id="register-form" role="form" autocomplete="off" class="form" method="post">    
+                        <p>กรุณากรอกชื่อผู้ใช้เพื่อยืนยันการเปลี่ยนรหัสผ่าน</p>
+
+                        <?php 
+                        if(!empty($user_err)){
+                            echo '<div class="alert alert-danger">' . $user_err . '</div>';
+                        }        
+                        ?>
+                        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                             <div class="form-group">
                                 <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope color-blue"></i></span>
-                                <input id="email" name="email" placeholder="email address" class="form-control"  type="email">
+                                    <input id="username" name="username" placeholder="ชื่อผู้ใช้" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>"  >
+                                    <span class="invalid-feedback"><?php echo $username_err; ?></span>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input name="recover-submit" class="btn btn-lg btn-primary btn-block" value="Reset Password" type="submit">
+                                <input type="submit" class="btn btn-primary btn-lg btn-block" value="เข้าสู่ระบบ">
                             </div>
-                            
-                            <!-- <input type="hidden" class="hide" name="token" id="token" value="">  -->
                             </form>
                     </div>
                 </div>

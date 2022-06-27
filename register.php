@@ -1,12 +1,5 @@
 <?php
-    require_once "includes/connect.php";	
-
-    // $Firstname = $_POST['Firstname'];
-    // $Lasttname = $_POST['Lasttname'];
-    // $Usertname = $_POST['Usertname'];
-    // $Password = $_POST['Password'];
-    // $ConPassword = $_POST['ConPassword'];
-    // $Agency = $_POST['Agency'];
+    require_once "includes/connect.php";
     
 
     $username = $password = $Firstname = $Lastname = $Email = $Agency = $Rank = $confirm_password = "";
@@ -84,30 +77,10 @@
             mysqli_query($conn, $sql);
 
             header("location: login.php");
-            // if($stmt = mysqli_prepare($conn, $sql)){
-            //     // Bind variables to the prepared statement as parameters
-            //     mysqli_stmt_bind_param($stmt, "ss", $param_Firstname, $param_Lastname, $param_username, $param_password, $param_Agency);
-                
-            //     // Set parameters
-            //     $param_Firstname = $Firstname; 
-            //     $param_Lastname  = $Lastname; 
-            //     $param_username = $username;
-            //     $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
-            //     $param_Agency    = $Agency;
-                
-            //     // Attempt to execute the prepared statement
-            //     if(mysqli_stmt_execute($stmt)){
-            //         // Redirect to login page
-            //         header("location: login.php");
-            //     } else{
-            //         echo "Oops! Something went wrong. Please try again later.";
-            //     }
-    
-            //     // Close statement
-            //     mysqli_stmt_close($stmt);
-            // }
+            
         }else{
-            echo '<script>alert("'.$username_err.''.$password_err.''.$confirm_password_err.'");</script>';
+            // echo '<script>alert("'.$username_err.''.$password_err.''.$confirm_password_err.'");</script>';
+            $password_err = "รหัสผ่านไม่ตรงกัน กรุณากรอกใหม่";
         }
         
         // Close connection
@@ -141,38 +114,44 @@
                 <h2>ลงทะเบียน</h2>
                 <p>กรุณากรอกแบบฟอร์มนี้เพื่อสร้างบัญชี</p>
                 
-                <form method="post">
+                    <?php 
+                        if(!empty($password_err)){
+                            echo '<div class="alert alert-danger">' . $password_err . '</div>';
+                        }        
+                    ?>
+                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                     <div class="form-group">
                         <label >ชื่อ</label>
-                        <input type="text" class="form-control" id="Firstname" name="Firstname" aria-describedby="emailHelp" placeholder="ชื่อ">
+                        <input type="text" class="form-control" id="Firstname" name="Firstname" aria-describedby="emailHelp" placeholder="ชื่อ" required>
                     </div>
                     <div class="form-group">
                         <label >นามสกุล</label>
-                        <input type="text" class="form-control" id="Lastname" name="Lastname" aria-describedby="emailHelp" placeholder="นามสกุล">
+                        <input type="text" class="form-control" id="Lastname" name="Lastname" aria-describedby="emailHelp" placeholder="นามสกุล" required>
                     </div>
                     <div class="form-group">
                         <label >ชื่อผู้ใช้</label>
-                        <input type="text" class="form-control" id="Usertname" name="Usertname" aria-describedby="emailHelp" placeholder="ชื่อผู้ใช้">
+                        <input type="text" class="form-control" id="Usertname" name="Usertname" aria-describedby="emailHelp" placeholder="ชื่อผู้ใช้" required>
                     </div>
                     <div class="form-group">
                         <label >อีเมล</label>
-                        <input type="email" class="form-control" id="Email" name="Email" aria-describedby="emailHelp" placeholder="อีเมล">
+                        <input type="email" class="form-control" id="Email" name="Email" aria-describedby="emailHelp" placeholder="อีเมล" required>
                     </div>
                     <div class="form-group">
                         <label >รหัสผ่าน</label>
-                        <input type="password" class="form-control" id="Password" name="Password" placeholder="รหัสผ่าน">
+                        <input type="password" class="form-control" id="Password" name="Password" placeholder="รหัสผ่าน" required>
                     </div>
                     <div class="form-group">
                         <label >ยืนยันรหัสผ่าน</label>
-                        <input type="password" class="form-control" id="ConPassword" name="ConPassword" placeholder="ยืนยันรหัสผ่าน">
+                        <input type="password" class="form-control" id="ConPassword" name="ConPassword" placeholder="ยืนยันรหัสผ่าน" required>
+                        <span class="invalid-feedback"><?php echo $confirm_password_err; ?></span>
                     </div>
                     <div class="form-group">
                         <label >หน่วยงาน</label>
-                        <input type="text" class="form-control" id="Agency" name="Agency" placeholder="ชื่อหน่วยงาน">
+                        <input type="text" class="form-control" id="Agency" name="Agency" placeholder="ชื่อหน่วยงาน" required>
                     </div>
                     <div class="form-group">
                         <label >ตำแหน่ง</label>
-                        <input type="text" class="form-control" id="Rank" name="Rank" placeholder="ตำแหน่ง">
+                        <input type="text" class="form-control" id="Rank" name="Rank" placeholder="ตำแหน่ง" required>
                     </div>
                     <button type="submit" class="btn btn-primary">ยืนยัน</button><br><br>
                     <p>มีบัญชีอยู่แล้ว? <a href="login.php">เข้าสู่ระบบ</a></p>
