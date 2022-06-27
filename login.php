@@ -131,10 +131,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" placeholder="รหัสผ่าน">
                             <span class="invalid-feedback"><?php echo $password_err; ?></span>
                         </div>
+                        <p><a href="forgot.php">ลืมรหัสผ่าน?</a>
                         <div class="form-group">
-                            <input type="submit" class="btn btn-primary" value="เข้าสู่ระบบ">
+                            <input type="submit" class="btn btn-primary btn-lg btn-block" value="เข้าสู่ระบบ">
                         </div>
-                        <p>ยังไม่มีบัญชี? <a href="register.php">สมัครเลย</a></p>
+                        <p><center>ยังไม่มีบัญชี? <a href="register.php">สมัครเลย</a></center></p>
                 </form>
                 </div>
             </div>

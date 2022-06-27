@@ -9,7 +9,7 @@
     // $Agency = $_POST['Agency'];
     
 
-    $username = $password = $Firstname = $Lastname = $Agency = $Rank = $confirm_password = "";
+    $username = $password = $Firstname = $Lastname = $Email = $Agency = $Rank = $confirm_password = "";
     $username_err = $password_err = $confirm_password_err = "";
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -74,12 +74,13 @@
 
             $Firstname =trim($_POST["Firstname"]);
             $Lastname = trim($_POST["Lastname"]);
+            $Email = trim($_POST["Email"]);
             $Agency = trim($_POST["Agency"]);
             $Rank = trim($_POST["Rank"]);
             // $password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
 
             // Prepare an insert statement
-            $sql = "INSERT INTO tb_user (First_name, Last_name, UserName, Password, Agency, Rank, Status) VALUES ('$Firstname', '$Lastname', '$username', '$password', '$Agency', '$Rank', 'User')";
+            $sql = "INSERT INTO tb_user (First_name, Last_name, UserName, Email, Password, Agency, Rank, Status) VALUES ('$Firstname', '$Lastname', '$username', '$Email', '$password', '$Agency', '$Rank', 'User')";
             mysqli_query($conn, $sql);
 
             header("location: login.php");
@@ -152,6 +153,10 @@
                     <div class="form-group">
                         <label >ชื่อผู้ใช้</label>
                         <input type="text" class="form-control" id="Usertname" name="Usertname" aria-describedby="emailHelp" placeholder="ชื่อผู้ใช้">
+                    </div>
+                    <div class="form-group">
+                        <label >อีเมล</label>
+                        <input type="email" class="form-control" id="Email" name="Email" aria-describedby="emailHelp" placeholder="อีเมล">
                     </div>
                     <div class="form-group">
                         <label >รหัสผ่าน</label>
