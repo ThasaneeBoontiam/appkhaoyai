@@ -101,7 +101,7 @@
     <title>Register</title>
     <style>
         body{ font: 14px sans-serif; }
-        .wrappers{ width: 65%; padding: 30px; }
+        .wrappers{ width: 360px; padding: 30px; }
         
     </style>
 </head>
@@ -120,13 +120,7 @@
                         }        
                     ?>
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                    <div class="form-group">
-                        <label >ชื่อ</label>
-                        <input type="text" class="form-control" id="Firstname" name="Firstname" aria-describedby="emailHelp" placeholder="ชื่อ" required>
-                    </div>
-                    <div class="form-group">
-                        <label >นามสกุล</label>
-                        <input type="text" class="form-control" id="Lastname" name="Lastname" aria-describedby="emailHelp" placeholder="นามสกุล" required>
+                    
                 <form method="post">
                     <div class="form-row">
                         <div class="form-group col-md-6">
@@ -163,27 +157,6 @@
                     <div class="form-group">
                         <label >ตำแหน่ง</label>
                         <input type="text" class="form-control" id="Rank" name="Rank" placeholder="ตำแหน่ง" required>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label >รหัสผ่าน</label>
-                            <input type="password" class="form-control" id="Password" name="Password" placeholder="รหัสผ่าน">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label >ยืนยันรหัสผ่าน</label>
-                            <input type="password" class="form-control" id="ConPassword" name="ConPassword" placeholder="ยืนยันรหัสผ่าน">
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label >หน่วยงาน</label>
-                            <input type="text" class="form-control" id="Agency" name="Agency" placeholder="ชื่อหน่วยงาน">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label >ตำแหน่ง</label>
-                            <input type="text" class="form-control" id="Rank" name="Rank" placeholder="ตำแหน่ง">
-                        </div>
                     </div>
 
                     <button type="submit" class="btn btn-primary">ยืนยัน</button><br><br>
