@@ -56,11 +56,15 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label for="completename">ชื่อ-นามสกุล</label>
-                    <input type="name" class="form-control" id="updatename" placeholder="Enter name elephant" readonly>
+                    <input type="name" class="form-control" id="updatename" placeholder="Enter name" readonly>
                 </div>
                 <div class="form-group">
                     <label for="completename">สถานะ</label>
-                    <input type="name" class="form-control" id="updatstatus" placeholder="Enter name elephant">
+                    <!-- <input type="name" class="form-control" id="updatstatus" placeholder="Enter status"> -->
+                    <select name="" class="form-control selectpicker">
+                        <option value="Admin">Admin</option>
+                        <option value="User">User</option>
+					</select>
                 </div>
             </div>
             <div class="modal-footer">
