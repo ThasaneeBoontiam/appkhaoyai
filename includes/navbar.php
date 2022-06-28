@@ -43,7 +43,7 @@
 
 <!-- Nav Item - Dashboard -->
 <li class="nav-item active">
-    <a class="nav-link" href="add_data_admin.php">
+    <a class="nav-link" href="add_data.php">
         <i class='bx bxs-file-plus'></i>
         <span class="links_name">เพิ่มข้อมูล</span>
     </a>

@@ -1,7 +1,7 @@
 <?php
     include('includes/header.php');
-    include('includes/navbar.php');
     include('includes/connect.php');
+    
 
     $sql_nameele = "SELECT * FROM `tb_elephant`";
 	$resele = mysqli_query($conn, $sql_nameele);
@@ -19,7 +19,16 @@
 	$query3 = mysqli_query($conn, $sql_user);
 
 	date_default_timezone_set("Asia/Bangkok");
-?>
+
+    if($_SESSION["status"] == "Admin"){
+        include('includes/navbar.php');
+    }else{
+        ?>
+        </div>
+        <div class="tab">
+        <button class="tablinks" onclick="document.location='logout.php'">ออกจากระบบ</button>
+    </div>
+  <?php  } ?>
     <div class="container">
         <section class="mt-5">
             <div class="card bg-light">
@@ -127,8 +136,11 @@
                                         if($value['id'] == '1'){
                                             echo "<input type='text' class='form-control' name='text_{$value['id']}' id='text_{$value['id']}' readonly >";
                                         }
-                                        else{
+                                        elseif($value['id'] != '9'){
                                             echo "<input type='text' class='form-control' name='text_{$value['id']}' id='text_{$value['id']}' >";
+                                        }
+                                        else{
+                                            echo "<textarea name='text_{$value['id']}' id='text_{$value['id']}' cols='30 rows='10' class='form-control'></textarea>";
                                         }
                                     ?>
                                 </div>
@@ -193,6 +205,7 @@
             document.getElementById("text_1").value =  "/";
             for (let i = 1; i < 10; i++) {
                 $("input#text_"+i).hide();
+                $("textarea#text_"+i).hide();
                 $(":checkbox").click(countChecked);   
             }
         }
@@ -200,10 +213,12 @@
         function countChecked() {
             for (let i = 1; i < 10; i++) {
                 if ($("input#"+i).is(':checked')) {
-                    $("input#text_"+i).show();                
+                    $("input#text_"+i).show();
+                    $("textarea#text_"+i).show();         
                 }
                 else {
-                    $("input#text_"+i).hide(); 
+                    $("input#text_"+i).hide();
+                    $("textarea#text_"+i).hide();
                 } 
             }
         }

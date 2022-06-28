@@ -448,7 +448,7 @@
     // Check if the user is logged in, if not then redirect him to login page
     if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
         if($_SESSION["status"] == "User"){
-            header("Location: add_data_user.php");
+            header("Location: add_data.php");
         }
         elseif($_SESSION["status"] == "Admin"){
             header("Location: home.php");
@@ -457,4 +457,16 @@
     }else {
         header("Location: login.php");
         exit();
+    }
+
+    //////////////////////////////////////////////////////////////////////
+    
+    
+
+    if(isset($_POST['deletesend'])){
+        $unique=$_POST['deletesend'];
+    
+        $sql = "DELETE FROM `tb_user` WHERE id=$unique";
+        
+        $result = mysqli_query($conn,$sql);
     }

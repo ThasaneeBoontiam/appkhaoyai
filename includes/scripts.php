@@ -9,31 +9,17 @@
 <script src="js/sb-admin-2.min.js"></script>
 
 <!-- Page level plugins -->
-<script src="vendor/chart.js/Chart.min.js"></script>
+<!-- <script src="vendor/chart.js/Chart.min.js"></script> -->
 
 <!-- Page level custom scripts -->
-<script src="js/demo/chart-area-demo.js"></script>
-<script src="js/demo/chart-pie-demo.js"></script>
+<!-- <script src="js/demo/chart-area-demo.js"></script>
+<script src="js/demo/chart-pie-demo.js"></script> -->
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
-
-    const  month_arr = ["",
-                            "มกราคม",
-                            "กุมภาพันธ์",
-                            "มีนาคม",
-                            "เมษายน",
-                            "พฤษภาคม",
-                            "มิถุนายน",
-                            "กรกฏาคม",
-                            "สิงหาคม",
-                            "กันยายน",
-                            "ตุลาคม",
-                            "พฤศจิกายน",
-                            "ธันวาคม" ] ; //กำหนด อาร์เรย์ $month_arr  เพื่อเก็บ ชื่อเดือน ของไทย
 
     //function Update
     // function GetDetails(updateid){
