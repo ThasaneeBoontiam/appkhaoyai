@@ -6,6 +6,7 @@
     $mysql="SELECT DISTINCT name_ele FROM tb_image";
     $query=mysqli_query($conn,$mysql);
 ?>
+
     <h2 align="center">รูปภาพช้าง</h2>
     <div class="table-responsive">
         <table  width="100%" border= "0">

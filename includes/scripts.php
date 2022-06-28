@@ -17,8 +17,8 @@
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <script type="text/javascript">
 
     //function Update
@@ -167,11 +167,11 @@
             }
         });
     });
-
+    
     function ExportToExcel(fileExtension,fileName) {
-            var fileName = "รายงานช้างออกเดือน " + month_arr[$('#month_datalist').val()] + " " + (parseInt($('#years_datalist').val())+543);
-            var elt = document.getElementById('tbShowData');
-            var wb = XLSX.utils.table_to_book(elt, { sheet: "sheet1" });
-            return XLSX.writeFile(wb, fileName+"."+fileExtension || ('MySheetName.'+(fileExtension || 'xlsx')));
-        }
+        var fileName = "รายงานช้างออกเดือน " + month_arr[$('#month_datalist').val()] + " " + (parseInt($('#years_datalist').val())+543);
+        var elt = document.getElementById('tbShowData');
+        var wb = XLSX.utils.table_to_book(elt, { sheet: "sheet1" });
+        return XLSX.writeFile(wb, fileName+"."+fileExtension || ('MySheetName.'+(fileExtension || 'xlsx')));
+    }
 </script>

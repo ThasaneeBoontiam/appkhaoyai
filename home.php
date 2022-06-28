@@ -33,6 +33,11 @@
                     </select></td>
                 <td>
                     <input type="button" id="LineNoti" name="LineNoti" value="Line">
+                    
+                    <button id="btnExport" class="btn btn-primary" onclick="ExportToExcel('xlsx','myfile')">
+                        <span class="glyphicon glyphicon-download"></span>
+                        Download list
+                    </button>
                 </td>
             </tr>
             <tr>
@@ -48,12 +53,8 @@
                     </thead>
                 </table>
             </div>
-            <button id="btnExport" class="btn btn-primary" onclick="ExportToExcel('xlsx','myfile')">
-                <span class="glyphicon glyphicon-download"></span>
-                Download list
-            </button>
     </div>
-
+    
 <?php
     include('includes/scripts.php');
     include('includes/footer.php');

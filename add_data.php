@@ -1,3 +1,4 @@
+
 <?php
     include('includes/header.php');
     include('includes/connect.php');
@@ -193,6 +194,8 @@
         </section>
     </div>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
     <script>       
 
         var positon_lat;
