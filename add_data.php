@@ -2,6 +2,7 @@
 <?php
     include('includes/header.php');
     include('includes/connect.php');
+    include('includes/navbar.php');
     
 
     $sql_nameele = "SELECT * FROM `tb_elephant`";
@@ -20,16 +21,7 @@
 	$query3 = mysqli_query($conn, $sql_user);
 
 	date_default_timezone_set("Asia/Bangkok");
-
-    if($_SESSION["status"] == "Admin"){
-        include('includes/navbar.php');
-    }else{
-        ?>
-        </div>
-        <div class="tab">
-        <button class="tablinks" onclick="document.location='logout.php'">ออกจากระบบ</button>
-    </div>
-  <?php  } ?>
+    ?>
     <div class="container">
         <section class="mt-5">
             <div class="card bg-light">

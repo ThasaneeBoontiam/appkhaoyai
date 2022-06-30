@@ -2,9 +2,22 @@
    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
 <!-- Sidebar - Brand -->
+<?php
+  if($_SESSION['status'] == 'Admin'){
+?>
 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="home.php">
+
+<?php
+  }else{
+    ?>
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="add_data.php">
+<?php
+  }
+?>
   <div class="sidebar-brand-icon">
-  <i class='bx bxl-postgresql'></i>
+  <!-- <i class='bx bxl-postgresql'></i> -->
+  <img class="img-profile rounded-circle" src="/image/Khaoyai-Logo.ico">
+  
   </div>
   <!-- <div class="sidebar-brand-text mx-3">FUNDA <sup>WEB IT</sup></div> -->
   <div class="sidebar-brand-text mx-3">รายงานช้างออกนอกพื้นที่</div>
@@ -16,6 +29,11 @@
 <div class="sidebar-heading">
   Interface
 </div>
+
+<?php
+  if($_SESSION['status'] == 'Admin'){
+    
+?>
 
 <!-- Nav Item - Dashboard -->
 <li class="nav-item active">
@@ -40,6 +58,10 @@
         <span class="links_name">การจัดการผู้ใช้งาน</span>
     </a>
 </li>
+
+<?php
+  }
+?>
 
 <!-- Nav Item - Dashboard -->
 <li class="nav-item active">

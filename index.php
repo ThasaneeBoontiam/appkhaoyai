@@ -289,7 +289,7 @@
         foreach($_FILES['upload']['tmp_name'] as $key => $value){
             $file_name = $_FILES['upload']['name'];
             $new_name = $file_name[$key];
-            if(move_uploaded_file($_FILES['upload']['tmp_name'][$key],"uploads/".$new_name)){
+            if(move_uploaded_file($_FILES['upload']['tmp_name'][$key],"img/uploads/".$new_name)){
                     $sqlimage = "INSERT INTO `tb_image`(`id`, `name_ele`, `date`, `timeimg`, `image`)
                                 VALUES (NULL, '$nameele','$date','$time', '$new_name')";
                 mysqli_query($conn, $sqlimage);
@@ -343,7 +343,7 @@
         $mymessage .= "{$_SESSION["fname"]} {$_SESSION["lname"]}\n";
         $mymessage .= "{$_SESSION["rank"]}\n";
         $mymessage .= "ผู้รายงาน\n";
-        $imageFile = new CURLFILE('uploads/2_4.png'); // Local Image file Path
+        $imageFile = new CURLFILE('img/uploads/2_4.png'); // Local Image file Path
         // $sticker_package_id = '2';  // Package ID sticker
         // $sticker_id = '34';    // ID sticker
         $data = array (
