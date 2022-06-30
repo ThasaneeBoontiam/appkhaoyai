@@ -15,8 +15,8 @@
   }
 ?>
   <div class="sidebar-brand-icon">
-  <!-- <i class='bx bxl-postgresql'></i> -->
-  <img class="img-profile rounded-circle" src="/image/Khaoyai-Logo.ico">
+  <i class='bx bxl-postgresql'></i>
+  <!-- <img class="img-profile rounded-circle" src="img/Khaoyai-Logo.ico"> -->
   
   </div>
   <!-- <div class="sidebar-brand-text mx-3">FUNDA <sup>WEB IT</sup></div> -->
@@ -121,7 +121,18 @@
                <?=$_SESSION["fname"];?>
                   
                 </span>
-                <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                <?php
+                  if($_SESSION['status'] == 'Admin'){
+                    ?>
+                    <img class="img-profile rounded-circle" src="img/profile/alpha_a_circle_icon_136977.png">
+                <?php
+                  }else{
+                    ?>
+                    <img class="img-profile rounded-circle" src="img/profile/alpha_u_circle_icon_136964.png">
+                <?php
+                  }
+                ?>
+                
               </a>
               <!-- Dropdown - User Information -->
               <?php
