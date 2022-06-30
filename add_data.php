@@ -180,11 +180,10 @@
                             <label for="upload">รูปภาพ</label>
                             <input type="file" class="form-control-file" name="upload[]" id="upload" multiple="multiple">
                         </div>
-                        <div class="d-flex justify-content-center">
-                            <div class="form-group col-md-1">
-                                <input type="submit" value="บันทึก" class="btn btn-success"></input>
-                            </div>
-                            <div class="form-group col-md-1">
+                        
+                        <div class="form-group">
+                            <div class="text-center">
+                                <input type="submit" value="บันทึก" class="btn btn-success" onclick="confirmAction()"></input>
                                 <input type="button" onclick="document.referrer ? window.location = document.referrer : history.back()" value="ย้อนกลับ" class='btn btn-danger btn-xs'>
                             </div>
                         </div>
@@ -369,6 +368,15 @@
                 return zdef;
             }
         }
+
+        function confirmAction() {
+        let confirmAction = confirm("Are you sure to execute this action?");
+        if (confirmAction) {
+          alert("Action successfully executed");
+        } else {
+          alert("Action canceled");
+        }
+      }
 	</script>
 <?php
     include('includes/scripts.php');

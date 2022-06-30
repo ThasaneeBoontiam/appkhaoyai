@@ -58,12 +58,18 @@
     <style>
         body{ font: 14px sans-serif; }
         .wrapper{ width: 360px; padding: 20px; }
+
+        /* html, body {
+            height: 100%;
+        } */
         
     </style>
 </head>
 <body>
 
-<div class="d-flex justify-content-center">
+<!-- <div class="container h-100 d-flex justify-content-center">
+    <div class="jumbotron my-auto"> -->
+    <div class="d-flex justify-content-center">
     <div class="wrapper">
         <div class="card bg-light">
             <div class="card-body">
@@ -84,12 +90,16 @@
                         <input type="password" class="form-control" id="ConPassword" name="ConPassword" placeholder="ยืนยันรหัสผ่าน">
                         <span class="invalid-feedback"><?php echo $confirm_password_err; ?></span>
                     </div>
-                    <button type="submit" class="btn btn-primary">ยืนยัน</button><br><br>
+                    <div class="form-group">
+                        
+                            <button type="submit" class="btn btn-primary">ยืนยัน</button>
                     
+                        </div>
                 </form>
             </div>
         </div>
     </div>
 </div>   
+<!-- </div>  -->
 </body>
 </html>

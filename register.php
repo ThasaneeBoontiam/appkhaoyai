@@ -138,10 +138,10 @@
                     </div>
 
                     <div class="form-group">
-                        <label >ชื่อผู้ใช้</label>
-                        <input type="text" class="form-control" id="Usertname" name="Usertname" aria-describedby="emailHelp" placeholder="ชื่อผู้ใช้" required>
+                        <label >อีเมล</label>
+                        <input type="email" class="form-control" id="Usertname" name="Usertname" aria-describedby="emailHelp" placeholder="อีเมล" required>
                         <div class="invalid-feedback">
-                            กรุณากรอกชื่อผู้ใช้
+                            กรุณากรอกอีเมล
                         </div>
                     </div>
                     <div class="form-group">

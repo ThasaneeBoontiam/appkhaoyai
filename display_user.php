@@ -58,9 +58,23 @@ if(isset($_POST['hiddendata'])){
     $result=mysqli_query($conn,$sql);
 }
 
+//Edit  /////////////////////
+if(isset($_POST['hiddenEditData'])){
+    $uniqueid=$_POST['hiddenEditData'];
+    $name=$_POST['Editname'];
+    $Sname=$_POST['EditSname'];
+    $Agency=$_POST['EditAgency'];
+    $Rank=$_POST['EditRank'];
+
+    $sql="UPDATE `tb_user` SET `First_name`='$name',`Last_name`='$Sname',`Agency`='$Agency',`Rank`='$Rank' WHERE `id`='$uniqueid'";
+    $result=mysqli_query($conn,$sql);
+}
+
 if(isset($_POST['deletesend'])){
     $unique=$_POST['deletesend'];
 
     $sql="delete from `tb_user` where id=$unique";
     $result = mysqli_query($conn,$sql);
 }
+
+

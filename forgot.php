@@ -49,7 +49,7 @@
                         }
                     } else{
                         // Username doesn't exist, display a generic error message
-                        $user_err = "ชื่อผู้ใช้ไม่ถูกต้อง";
+                        $user_err = "อีเมลไม่ถูกต้อง";
                     }
                 } else{
                     echo "Oops! Something went wrong. Please try again later.";
@@ -85,7 +85,7 @@
                 <div class="card-body">
                     <div class="container">
                         <h3>ลืมรหัสผ่าน?</h3>
-                        <p>กรุณากรอกชื่อผู้ใช้เพื่อยืนยันการเปลี่ยนรหัสผ่าน</p>
+                        <p>กรุณากรอกอีเมลเพื่อยืนยันการเปลี่ยนรหัสผ่าน</p>
 
                         <?php 
                         if(!empty($user_err)){
@@ -95,12 +95,15 @@
                         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                             <div class="form-group">
                                 <div class="input-group">
-                                    <input id="username" name="username" placeholder="ชื่อผู้ใช้" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>"  >
+                                    <input type="email" id="username" name="username" placeholder="อีเมล" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>"  >
                                     <span class="invalid-feedback"><?php echo $username_err; ?></span>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input type="submit" class="btn btn-primary btn-lg btn-block" value="เข้าสู่ระบบ">
+                            <div class="text-center">
+                                <input type="submit" class="btn btn-primary " value="ดำเนินการต่อ">
+                                <input type="button" onclick="document.referrer ? window.location = document.referrer : history.back()" value="ย้อนกลับ" class='btn btn-danger btn-xs'>
+                            </div>
                             </div>
                             </form>
                     </div>

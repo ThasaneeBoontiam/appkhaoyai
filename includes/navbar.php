@@ -96,29 +96,31 @@
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                   
-               ADMIN
+               <?=$_SESSION["fname"];?>
                   
                 </span>
                 <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
               </a>
               <!-- Dropdown - User Information -->
-              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
+              <?php
+                echo '<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#EditModal" onclick="GetEditDetail('.$_SESSION["id"].')">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Profile
-                </a>
-                <a class="dropdown-item" href="#">
+                  แก้ไขโปรไฟล์
+                </a>';
+                ?>
+                <!-- <a class="dropdown-item" href="#">
                   <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                   Settings
                 </a>
                 <a class="dropdown-item" href="#">
                   <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                   Activity Log
-                </a>
+                </a> -->
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="logout.php" data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Logout
+                  ออกจากระบบ
                 </a>
               </div>
             </li>
@@ -160,3 +162,80 @@
       </div>
     </div>
   </div>
+
+
+  <!-- update Modal -->
+<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">แก้ไขโปรไฟล์</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+            <label for="completename">ชื่อ</label>
+            <input type="name" class="form-control" id="Editname"  >
+        </div>
+        <div class="form-group">
+            <label for="completename">นามสกุล</label>
+            <input type="name" class="form-control" id="EditSname"  >
+        </div>
+        <div class="form-group">
+            <label for="completename">หน่วยงาน</label>
+            <input type="name" class="form-control" id="EditAgency"  >
+        </div>
+        <div class="form-group">
+            <label for="completename">ตำแหน่ง</label>
+            <input type="name" class="form-control" id="EditRank" >
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" onclick="EditDetail()" >Update</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <input type="hidden" id="hiddenEditData">
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  //function Update
+  function GetEditDetail(updateid){
+        $('#hiddenEditData').val(updateid);
+
+        $.post("display_user.php",{updateid:updateid},
+        function(data,status){
+            var userid=JSON.parse(data);
+            $('#Editname').val(userid.First_name);
+            $('#EditSname').val(userid.Last_name);
+            $('#EditAgency').val(userid.Agency);
+            $('#EditRank').val(userid.Rank);
+        });
+        $('#EditModal').modal('show');
+        
+    }
+
+  //onclick update event function
+  function EditDetail() {
+        var Editname=$('#Editname').val();
+        var EditSname=$('#EditSname').val();
+        var EditAgency=$('#EditAgency').val();
+        var EditRank=$('#EditRank').val();
+        var hiddenEditData=$('#hiddenEditData').val();
+        
+        $.post("display_user.php",{
+            Editname:Editname,
+            EditSname:EditSname,
+            EditAgency:EditAgency,
+            EditRank:EditRank,
+            hiddenEditData:hiddenEditData
+        },function(data,status){
+          $('#EditModal').modal('hide');
+        });
+        location.reload();
+    }
+
+</script>

@@ -21,6 +21,20 @@
 
 <script type="text/javascript">
 
+const  month_arr = ["",
+                            "มกราคม",
+                            "กุมภาพันธ์",
+                            "มีนาคม",
+                            "เมษายน",
+                            "พฤษภาคม",
+                            "มิถุนายน",
+                            "กรกฏาคม",
+                            "สิงหาคม",
+                            "กันยายน",
+                            "ตุลาคม",
+                            "พฤศจิกายน",
+                            "ธันวาคม" ] ; //กำหนด อาร์เรย์ $month_arr  เพื่อเก็บ ชื่อเดือน ของไทย
+
     //function Update
     // function GetDetails(updateid){
     //     $('#hiddendata').val(updateid);

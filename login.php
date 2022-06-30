@@ -34,7 +34,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate credentials
     if(empty($username_err) && empty($password_err)){
         // Prepare a select statement
-        $sql = "SELECT `First_name`, `Last_name`, `UserName`, `Password`, `Agency`, `Rank`, `Status` FROM tb_user WHERE UserName = ?";
+        $sql = "SELECT `id`, `First_name`, `Last_name`, `UserName`, `Password`, `Agency`, `Rank`, `Status` FROM tb_user WHERE UserName = ?";
 
         if($stmt = mysqli_prepare($conn, $sql)){
             // Bind variables to the prepared statement as parameters
@@ -51,13 +51,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 // Check if username exists, if yes then verify password
                 if(mysqli_stmt_num_rows($stmt) == 1){                    
                     // Bind result variables
-                    mysqli_stmt_bind_result($stmt, $First_name, $Last_name, $username, $hash_password, $Agency, $Rank, $status);
+                    mysqli_stmt_bind_result($stmt, $id, $First_name, $Last_name, $username, $hash_password, $Agency, $Rank, $status);
                     if(mysqli_stmt_fetch($stmt)){
                         if($password == $hash_password){
                             session_start();
                             
                             // Store data in session variables
                             $_SESSION["loggedin"] = true;
+                            $_SESSION["id"] = $id;
                             $_SESSION["fname"] = $First_name;
                             $_SESSION["lname"] = $Last_name;
                             $_SESSION["username"] = $username;
@@ -124,7 +125,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                         <div class="form-group">
                             <label>ชื่อผู้ใช้</label>
-                            <input type="text" name="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>" placeholder="ชื่อผู้ใช้">
+                            <input type="email" name="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>" placeholder="ชื่อผู้ใช้">
                             <span class="invalid-feedback"><?php echo $username_err; ?></span>
                         </div>    
                         <div class="form-group">
