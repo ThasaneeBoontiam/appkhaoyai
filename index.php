@@ -367,19 +367,94 @@
 
             $token = "G0lqw73joxZ1Si2e4MuPOfb50puNSm3KyK3k1jlfpQr" ; // LINE Token
             //Message
-            $mymessage = "เรื่อง: ทดสอบส่งข้อความ \n"; //Set new line with '\n'
-            $mymessage .= "จาก: ข้อความจากแมว \n";
-            $mymessage .= "รายละเอียด: แมวหิวแล้วจ้า";
-            $imageFile = new CURLFILE('uploads/2_4.png'); // Local Image file Path
-            $sticker_package_id = '2';  // Package ID sticker
-            $sticker_id = '34';    // ID sticker
+            $mymessage = "\nเรียนหัวหน้าอุทยานแห่งชาติเขาใหญ่ \n\n"; //Set new line with '\n'
+            // $sql = "SELECT DISTINCT `date` FROM `tb_show` WHERE `date` = SUBSTRING(DATE_ADD(NOW(), INTERVAL -1 DAY), 1, 10)";
+            $sql = "SELECT DISTINCT `date` FROM `tb_show` WHERE `date` = '2022-06-29'";
+            $resday = mysqli_query($conn, $sql);
+            $resday = mysqli_fetch_assoc($resday);
+
+            $sql = "SELECT DISTINCT `agency` FROM `tb_show` WHERE `date` = '{$resday['date']}'";
+            $agency = mysqli_query($conn, $sql);
+            
+            $date = show_tdate($resday['date']);
+
+            $mymessage .= "เมื่อวันที่ $date \n";
+
+            foreach ($agency as $key => $agency) {
+                $mymessage .= "-----------------------------------------\n";
+                $mymessage .= "หน่วย {$agency['agency']}\n\n";
+
+                $sql = "SELECT DISTINCT `time` FROM `tb_show` WHERE `date` = '{$resday['date']}' AND `agency` = '{$agency['agency']}'";
+                $query = mysqli_query($conn, $sql);
+                foreach ($query as $key => $data) {
+                    $sql = "SELECT `num_ele`, `ele_name` FROM `tb_show` WHERE `agency` = '{$agency['agency']}' AND `date` = '{$resday['date']}' AND `time` = '{$data['time']}'";
+                    $query = mysqli_query($conn, $sql);
+                    $numele = 0;
+                    $elename = "";
+                    foreach ($query as $key => $ele) {
+                        $elename .= " '{$ele['ele_name']}'";
+                        $numele += (int)$ele['num_ele'];
+                    }
+
+                    $sql = "SELECT * FROM `tb_show` WHERE `agency` = '{$agency['agency']}' AND `date` = '{$resday['date']}' AND `time` = '{$data['time']}'";
+                    $query = mysqli_query($conn, $sql);
+                    $datareport = mysqli_fetch_assoc($query);
+
+                    $sql = "SELECT * FROM tb_show,tb_province,tb_area,tb_subarea WHERE '{$datareport['province_id']}'=tb_province.id AND '{$datareport['area_id']}'=tb_area.id AND '{$datareport['subarea_id']}'=tb_subarea.id";
+                    $city = mysqli_query($conn, $sql);
+                    $city = mysqli_fetch_assoc($city);
+
+                    $coordinates = "";
+                    if($datareport['location_damage_N'] != 0 && $datareport['location_damage_E'] != 0){
+                        $coordinates = "พิกัดความเสียหาย {$datareport['location_damage_E']} {$datareport['location_damage_N']}\n";
+                    }
+
+                    $damage = "";
+                    if($datareport['no_damage'] != NULL){
+                        $damage = "เบื้องต้นไม่พบความเสียหาย";
+                    }else{
+                        $damage = "เบื้องต้นพบ";
+                        if($datareport['property'] != NULL){
+                            $damage .=" ทรัพย์สิน {$datareport['property']}";
+                        }
+                        if($datareport['banana'] != NULL){
+                            $damage .=" กล้วย {$datareport['banana']}";
+                        }
+                        if($datareport['sugarcane'] != NULL){
+                            $damage .=" อ้อย {$datareport['sugarcane']}";
+                        }
+                        if($datareport['sweetcorn'] != NULL){
+                            $damage .=" ข้าวโพด {$datareport['sweetcorn']}";
+                        }
+                        if($datareport['coconut'] != NULL){
+                            $damage .=" มะพร้าว {$datareport['coconut']}";
+                        }
+                        if($datareport['jackfruit'] != NULL){
+                            $damage .=" ขนุน {$datareport['jackfruit']}";
+                        }
+                        if($datareport['mak'] != NULL){
+                            $damage .=" หมาก {$datareport['mak']}";
+                        }
+                        if($datareport['other'] != NULL){
+                            $damage .=strtr ( " {$datareport['other']}", "\n", " " );
+                        }
+                    }
+                    $mymessage .= "เวลา {$data['time']} พบช้างป่า $numele ตัว\n";
+                    $mymessage .= "($elename )\n";
+                    $mymessage .= "ออกมาหากินนอกเขตอุทยานฯบริเวณท้องที่ {$datareport['location']} ต.{$city['name_sub']} อ.{$city['name_ar']} จ.{$city['name_pr']}\n";
+                    $mymessage .= "$coordinates";
+                    $mymessage .= "$damage \n\n";
+                    $mymessage .= "{$datareport['name_user']}\n";
+                    $mymessage .= "{$datareport['rank']}\n";
+                    $mymessage .= "ผู้รายงาน\n\n";
+                }
+            }
+            // $imageFile = new CURLFILE('uploads/2_4.png'); // Local Image file Path
             $data = array (
-                'message' => $mymessage,
-                'imageFile' => $imageFile,
-                'stickerPackageId' => $sticker_package_id,
-                'stickerId' => $sticker_id
+                'message' => $mymessage
+                // 'imageFile' => $imageFile
             );
-            // line_notification($token,$data);
+            line_notification($token,$data);
 
         header("Location: home.php");
     }
