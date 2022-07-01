@@ -333,13 +333,17 @@
             }
         }
         
+        $coordinates = "";
+        if($x != 0 && $y != 0){
+            $coordinates = "พิกัดความเสียหาย $x, $y";
+        }
         
         $token = "G0lqw73joxZ1Si2e4MuPOfb50puNSm3KyK3k1jlfpQr" ; // LINE Token
         //Message
         $mymessage = "\nเรียนหัวหน้าอุทยานแห่งชาติเขาใหญ่\n\n"; //Set new line with '\n'
         $mymessage .= "{$_SESSION["agency"]} เมื่อวันที่ $date ออกตรวจเฝ้าระวังและผลักดันช้างป่าออกหากินออกนอกเขตพื้นที่อุทยานแห่งชาติเขาใหญ่";
         $mymessage .= "บริเวณท้องที่ $location ต.$subarea อ.$area จ.$province\n\n";
-        $mymessage .= "เวลา $time พบช้างป้า $numele ตัว ($nameele) ออกมาหากินนอกเขตอุทยานฯบริเวณท้องที่ $location พิกัด $y , $x  $damage \n\n";
+        $mymessage .= "เวลา $time พบช้างป้า $numele ตัว ($nameele) ออกมาหากินนอกเขตอุทยานฯบริเวณท้องที่ $location $coordinates $damage \n\n";
         $mymessage .= "{$_SESSION["fname"]} {$_SESSION["lname"]}\n";
         $mymessage .= "{$_SESSION["rank"]}\n";
         $mymessage .= "ผู้รายงาน\n";
