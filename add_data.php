@@ -3,7 +3,6 @@
     include('includes/header.php');
     include('includes/connect.php');
     include('includes/navbar.php');
-    
 
     $sql_nameele = "SELECT * FROM `tb_elephant`";
 	$resele = mysqli_query($conn, $sql_nameele);
@@ -175,10 +174,30 @@
                         
                         <div class="form-group">
                             <div class="text-center">
-                                <input type="submit" value="บันทึก" class="btn btn-success" onclick="confirmAction()"></input>
+                                <input type="button" value="บันทึก" class="btn btn-primary" onclick="" data-toggle="modal" data-target="#PopupModal"></input>
                                 <input type="button" onclick="document.referrer ? window.location = document.referrer : history.back()" value="ย้อนกลับ" class='btn btn-danger btn-xs'>
                             </div>
                         </div>
+
+                        <!-- POPUP Modal-->
+                        <div class="modal fade" id="PopupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">รูปแบบรายงาน</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                    </div>
+                                    <div class="modal-body"><label name="ShowMessage" id="ShowMessage"></label></div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-success">ยืนยัน</button>
+                                        <button class="btn btn-danger btn-xs" type="button" data-dismiss="modal">ยกเลิก</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </form>
                 </div>
             </div>
@@ -360,15 +379,6 @@
                 return zdef;
             }
         }
-
-        function confirmAction() {
-        let confirmAction = confirm("Are you sure to execute this action?");
-        if (confirmAction) {
-          alert("Action successfully executed");
-        } else {
-          alert("Action canceled");
-        }
-      }
 	</script>
 <?php
     include('includes/scripts.php');

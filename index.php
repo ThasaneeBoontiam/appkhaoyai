@@ -217,7 +217,6 @@
         $response['status']=200;
         $response['message']="Inavalid or data not found";
     }
-
     if(isset($_FILES['upload'])){
         $date = ($_POST['date']);
         $time = "{$_POST["time"]}น.";
@@ -252,8 +251,6 @@
             $_POST['text_1'] = "";
         }
         
-        print_r($_POST['text_1']);
-        
         $nameele="";
         $damage = "";
         $numele=0;
@@ -262,7 +259,7 @@
                 print_r($ele_name[$key]);
                 $sql_add = "INSERT INTO `tb_show`(`id`, `name_user`, `agency`, `date`, `time`, `province_id`, `area_id`, `subarea_id`, `num_ele`, `ele_name`, `location_in_x`, `location_in_y`, `location_out_x`, `location_out_y`, `location`, `no_damage`, `property`, `banana`, `sugarcane`, `sweetcorn`, `coconut`, `jackfruit`, `mak`, `other`, `location_damage_E`, `location_damage_N`)
                                         VALUES ( NULL, '{$_SESSION["fname"]} {$_SESSION["lname"]}', '{$_SESSION["agency"]}', '$date', '$time', '$province_id', '$area_id', '$subarea_id', '$num_ele', '$value', '$location_in_x', '$location_in_y', '$location_out_x', '$location_out_y', '$location', '{$_POST['text_1']}', '{$_POST['text_2']}', '{$_POST['text_3']}', '{$_POST['text_4']}', '{$_POST['text_5']}', '{$_POST['text_6']}', '{$_POST['text_7']}', '{$_POST['text_8']}', '{$_POST['text_9']}', '$y', '$x')";
-                mysqli_query($conn,$sql_add) or die ("Error in query: $sql_add " . mysqli_error());
+                // mysqli_query($conn,$sql_add) or die ("Error in query: $sql_add " . mysqli_error());
                 $nameele .=" '$value' ";
                 $numele+=$num_ele;
                 
@@ -275,12 +272,12 @@
             $count = mysqli_num_rows($rescount);
             if($count == 0){
                     $sqladdelephant = "INSERT INTO `tb_elephant`(`id`, `name`) VALUES (NULL,'$ele_name')";
-                    mysqli_query($conn, $sqladdelephant);
+                    // mysqli_query($conn, $sqladdelephant);
             }
 
             $sql_add = "INSERT INTO `tb_show`(`id`, `name_user`, `agency`, `date`, `time`, `province_id`, `area_id`, `subarea_id`, `num_ele`, `ele_name`, `location_in_x`, `location_in_y`, `location_out_x`, `location_out_y`, `location`, `no_damage`, `property`, `banana`, `sugarcane`, `sweetcorn`, `coconut`, `jackfruit`, `mak`, `other`, `location_damage_N`, `location_damage_E`)
                         VALUES ( NULL, '{$_SESSION["fname"]} {$_SESSION["lname"]}', '{$_SESSION["agency"]}', '$date', '$time', '$province_id', '$area_id', '$subarea_id', '{$_POST['inset_num_ele']}', '{$_POST['insert_ele']}', '$location_in_x', '$location_in_y', '$location_out_x', '$location_out_y', '$location', '{$_POST['text_1']}', '{$_POST['text_2']}', '{$_POST['text_3']}', '{$_POST['text_4']}', '{$_POST['text_5']}', '{$_POST['text_6']}', '{$_POST['text_7']}', '{$_POST['text_8']}', '{$_POST['text_9']}', '$x', '$y')";
-            mysqli_query($conn,$sql_add) or die ("Error in query: $sql_add " . mysqli_error());
+            // mysqli_query($conn,$sql_add) or die ("Error in query: $sql_add " . mysqli_error());
 
             $nameele .= " '" + $_POST['insert_ele'] + "' ";
             $numele+=$_POST['inset_num_ele'];
@@ -292,7 +289,7 @@
             if(move_uploaded_file($_FILES['upload']['tmp_name'][$key],"img/uploads/".$new_name)){
                     $sqlimage = "INSERT INTO `tb_image`(`id`, `name_ele`, `date`, `timeimg`, `image`)
                                 VALUES (NULL, '$nameele','$date','$time', '$new_name')";
-                mysqli_query($conn, $sqlimage);
+                // mysqli_query($conn, $sqlimage);
             }
         }
 
@@ -359,7 +356,7 @@
         
         // line_notification($token,$data);
 
-        header("Location: add_data.php");
+        // header("Location: add_data.php");
 
         exit();
     }
@@ -446,14 +443,14 @@
     // Check if the user is logged in, if not then redirect him to login page
     if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
         if($_SESSION["status"] == "User"){
-            header("Location: add_data.php");
+            // header("Location: add_data.php");
         }
         elseif($_SESSION["status"] == "Admin"){
-            header("Location: home.php");
+            // header("Location: home.php");
         }
         exit();
     }else {
-        header("Location: login.php");
+        // header("Location: login.php");
         exit();
     }
 
