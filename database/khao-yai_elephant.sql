@@ -190,6 +190,7 @@ CREATE TABLE `tb_show` (
   `id` int(11) NOT NULL,
   `name_user` text NOT NULL,
   `agency` varchar(20) NOT NULL,
+  `rank` varchar(20) NOT NULL,
   `date` varchar(20) NOT NULL,
   `time` varchar(20) NOT NULL,
   `province_id` int(11) NOT NULL,
