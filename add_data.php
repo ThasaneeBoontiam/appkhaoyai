@@ -29,11 +29,11 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="date">วันที่</label>
-                                <input type="date"  class="form-control" id="date" name="date">
+                                <input type="date"  class="form-control" id="date" name="date" required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="time">เวลา</label>
-                                <input type="time" class="form-control" id="time" name="time">
+                                <input type="time" class="form-control" id="time" name="time" required>
                             </div>
                         </div>
                         <div class="form-row">
@@ -142,13 +142,13 @@
                         <div class="form-group row">
                             <label for="location" class="col-sm-2 col-form-label">สถานที่</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" placeholder="กรอกสถานที่" id="location" name="location">
+                                <input type="text" class="form-control" placeholder="กรอกสถานที่" id="location" name="location" required>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <label for="province">จังหวัด</label>
-                                <select name="province" id="province" class="form-control">
+                                <select name="province" id="province" class="form-control" required>
                                     <option value="" selected disabled>-กรุณาเลือกจังหวัด-</option>
                                     <?php foreach ($query as $value) { ?>
                                         <option value="<?=$value['id']?>"><?=$value['name_pr']?></option>
@@ -157,12 +157,12 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="amphures">อำเภอ</label>
-                                <select name="amphures" id="amphures" class="form-control">
+                                <select name="amphures" id="amphures" class="form-control" required>
                                 </select>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="amphures">ตำบล</label>
-                                <select name="districts" id="districts" class="form-control">
+                                <select name="districts" id="districts" class="form-control" required>
                                 </select>
                             </div>
                         </div>
