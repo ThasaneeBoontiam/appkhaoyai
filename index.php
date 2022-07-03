@@ -143,9 +143,9 @@
                 <th scope="row">'.$number.'</th>
                 <td>'.show_tdate($value["date"]).'</td>
                 <td>'.$value["time"].'</td>
-                <td>'.$value["name_pr"].'</td>
-                <td>'.$value["name_ar"].'</td>
-                <td>'.$value["name_sub"].'</td>
+                <td>'.$value["province_name"].'</td>
+                <td>'.$value["area_name"].'</td>
+                <td>'.$value["subarea_name"].'</td>
                 <td>'.$value["num_ele"].'</td>
                 <td>'.$value["ele_name"].'</td>
                 <td>'.$value["location_in_y"].'</td>
@@ -277,7 +277,7 @@
         if($ele_name != NULL){
             foreach ($ele_name as $key => $value) {
                 print_r($ele_name[$key]);
-                $sql_add = "INSERT INTO `tb_show`(`id`, `name_user`, `agency`, `rank`, `date`, `time`, `province_id`, `area_id`, `subarea_id`, `num_ele`, `ele_name`, `location_in_x`, `location_in_y`, `location_out_x`, `location_out_y`, `location`, `no_damage`, `property`, `banana`, `sugarcane`, `sweetcorn`, `coconut`, `jackfruit`, `mak`, `other`, `location_damage_E`, `location_damage_N`)
+                $sql_add = "INSERT INTO `tb_show`(`id`, `name_user`, `agency`, `rank`, `date`, `time`, `province_name`, `area_name`, `subarea_name`, `num_ele`, `ele_name`, `location_in_x`, `location_in_y`, `location_out_x`, `location_out_y`, `location`, `no_damage`, `property`, `banana`, `sugarcane`, `sweetcorn`, `coconut`, `jackfruit`, `mak`, `other`, `location_damage_E`, `location_damage_N`)
                                         VALUES ( NULL, '{$_SESSION["fname"]} {$_SESSION["lname"]}', '{$_SESSION["agency"]}', '{$_SESSION["rank"]}', '$date', '$time', '$province', '$amphures', '$districts', '$num_ele', '$value', '$location_in_x', '$location_in_y', '$location_out_x', '$location_out_y', '$location', '{$_POST['text_1']}', '{$_POST['text_2']}', '{$_POST['text_3']}', '{$_POST['text_4']}', '{$_POST['text_5']}', '{$_POST['text_6']}', '{$_POST['text_7']}', '{$_POST['text_8']}', '{$_POST['text_9']}', '$y', '$x')";
                 mysqli_query($conn,$sql_add) or die ("Error in query: $sql_add " . mysqli_error());
                 $nameele .=" '$value' ";
@@ -295,7 +295,7 @@
                     mysqli_query($conn, $sqladdelephant);
             }
 
-            $sql_add = "INSERT INTO `tb_show`(`id`, `name_user`, `agency`, `rank`, `date`, `time`, `province_id`, `area_id`, `subarea_id`, `num_ele`, `ele_name`, `location_in_x`, `location_in_y`, `location_out_x`, `location_out_y`, `location`, `no_damage`, `property`, `banana`, `sugarcane`, `sweetcorn`, `coconut`, `jackfruit`, `mak`, `other`, `location_damage_N`, `location_damage_E`)
+            $sql_add = "INSERT INTO `tb_show`(`id`, `name_user`, `agency`, `rank`, `date`, `time`, `province_name`, `area_name`, `subarea_name`, `num_ele`, `ele_name`, `location_in_x`, `location_in_y`, `location_out_x`, `location_out_y`, `location`, `no_damage`, `property`, `banana`, `sugarcane`, `sweetcorn`, `coconut`, `jackfruit`, `mak`, `other`, `location_damage_N`, `location_damage_E`)
                         VALUES ( NULL, '{$_SESSION["fname"]} {$_SESSION["lname"]}', '{$_SESSION["agency"]}', '{$_SESSION["rank"]}', '$date', '$time', '$province', '$amphures', '$districts', '{$_POST['inset_num_ele']}', '{$_POST['insert_ele']}', '$location_in_x', '$location_in_y', '$location_out_x', '$location_out_y', '$location', '{$_POST['text_1']}', '{$_POST['text_2']}', '{$_POST['text_3']}', '{$_POST['text_4']}', '{$_POST['text_5']}', '{$_POST['text_6']}', '{$_POST['text_7']}', '{$_POST['text_8']}', '{$_POST['text_9']}', '$x', '$y')";
             mysqli_query($conn,$sql_add) or die ("Error in query: $sql_add " . mysqli_error());
 
@@ -318,7 +318,7 @@
             $damage = "เบื้องต้นไม่พบความเสียหาย ";
         }
         else{
-            $damage = "เบื้องต้นพบ";
+            $damage = "ความเสียหายเบื้องต้นพบ";
             for ($i=2; $i < 9; $i++) { 
                 if($_POST["$i"] == 'on'){
                     $sql = "SELECT `damage` FROM `tb_damage` WHERE `id` = '$i'";
@@ -374,7 +374,7 @@
             //Message
             $mymessage = "\nเรียนหัวหน้าอุทยานแห่งชาติเขาใหญ่ \n\n"; //Set new line with '\n'
             // $sql = "SELECT DISTINCT `date` FROM `tb_show` WHERE `date` = SUBSTRING(DATE_ADD(NOW(), INTERVAL -1 DAY), 1, 10)";
-            $sql = "SELECT DISTINCT `date` FROM `tb_show` WHERE `date` = SUBSTRING(DATE_ADD(NOW(), INTERVAL -1 DAY), 1, 10)";
+            $sql = "SELECT DISTINCT `date` FROM `tb_show` WHERE `date` = '2022-07-03'";
             $resday = mysqli_query($conn, $sql);
             $resday = mysqli_fetch_assoc($resday);
 
@@ -405,10 +405,6 @@
                     $query = mysqli_query($conn, $sql);
                     $datareport = mysqli_fetch_assoc($query);
 
-                    $sql = "SELECT * FROM tb_show,tb_province,tb_area,tb_subarea WHERE '{$datareport['province_id']}'=tb_province.id AND '{$datareport['area_id']}'=tb_area.id AND '{$datareport['subarea_id']}'=tb_subarea.id";
-                    $city = mysqli_query($conn, $sql);
-                    $city = mysqli_fetch_assoc($city);
-
                     $coordinates = "";
                     if($datareport['location_damage_N'] != 0 && $datareport['location_damage_E'] != 0){
                         $coordinates = "พิกัดความเสียหาย {$datareport['location_damage_E']} {$datareport['location_damage_N']}\n";
@@ -418,7 +414,7 @@
                     if($datareport['no_damage'] != NULL){
                         $damage = "เบื้องต้นไม่พบความเสียหาย";
                     }else{
-                        $damage = "เบื้องต้นพบ";
+                        $damage = "ความเสียหายเบื้องต้นพบ";
                         if($datareport['property'] != NULL){
                             $damage .=" ทรัพย์สิน {$datareport['property']}";
                         }
@@ -446,7 +442,7 @@
                     }
                     $mymessage .= "เวลา {$data['time']} พบช้างป่า $numele ตัว\n";
                     $mymessage .= "($elename )\n";
-                    $mymessage .= "ออกมาหากินนอกเขตอุทยานฯบริเวณท้องที่ {$datareport['location']} ต.{$city['name_sub']} อ.{$city['name_ar']} จ.{$city['name_pr']}\n";
+                    $mymessage .= "ออกมาหากินนอกเขตอุทยานฯบริเวณท้องที่ {$datareport['location']} ต.{$datareport['subarea_name']} อ.{$datareport['area_name']} จ.{$datareport['province_name']}\n";
                     $mymessage .= "$coordinates";
                     $mymessage .= "$damage \n\n";
                     $mymessage .= "{$datareport['name_user']}\n";
