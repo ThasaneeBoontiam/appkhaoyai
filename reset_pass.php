@@ -9,7 +9,7 @@
         
         // Validate password
         if(empty(trim($_POST["Password"]))){
-            $password_err = "Please enter a password.";     
+            $password_err = "กรุณากรอกรหัสผ่าน";     
         } elseif(strlen(trim($_POST["Password"])) < 6){
             $password_err = "Password must have atleast 6 characters.";
         } else{
@@ -18,15 +18,16 @@
         
         // Validate confirm password
         if(empty(trim($_POST["ConPassword"]))){
-            $confirm_password_err = "Please confirm password.";     
-        } else{
-            $confirm_password = trim($_POST["ConPassword"]);
-            if(empty($password_err) && ($password != $confirm_password)){
-                $confirm_password_err = "Password did not match.";
+            $confirm_password_err = "กรุณายืนยันรหัสผ่าน";     
+        } elseif(empty($password_err) && ($password != trim($_POST["ConPassword"]))){
+            // $confirm_password_err = "รหัสผ่านไม่ตรงกัน กรุณากรอกใหม่";
+            $pass_err= "รหัสผ่านไม่ตรงกัน กรุณากรอกใหม่";
+        }else{
+                $confirm_password = trim($_POST["ConPassword"]);
             }
-        }
+        
 
-        if(empty($password_err) && empty($confirm_password_err)){
+        if(empty($password_err) && (empty($confirm_password_err) && empty($pass_err))){
 
             // Prepare an insert statement
             $sql = "UPDATE `tb_user` SET `Password`= '$password' WHERE `UserName` = '{$_SESSION["username"]}'";
@@ -35,7 +36,7 @@
             header("location: login.php");
         }else{
             // echo '<script>alert("'.$username_err.''.$password_err.''.$confirm_password_err.'");</script>';
-            $password_err = "รหัสผ่านไม่ตรงกัน กรุณากรอกใหม่";
+            $confirm_password = "รหัสผ่านไม่ตรงกัน กรุณากรอกใหม่";
         }
 
         // Close connection
@@ -53,53 +54,37 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+    <link rel="stylesheet" href="css/mystyle.css">
     <title>Register</title>
-    <style>
-        body{ font: 14px sans-serif; }
-        .wrapper{ width: 360px; padding: 20px; }
-
-        /* html, body {
-            height: 100%;
-        } */
-        
-    </style>
+    
 </head>
 <body>
 
-<!-- <div class="container h-100 d-flex justify-content-center">
-    <div class="jumbotron my-auto"> -->
-    <div class="d-flex justify-content-center">
-    <div class="wrapper">
-        <div class="card bg-light">
-            <div class="card-body">
-                <h2>เปลี่ยนรหัสผ่านใหม่</h2>
-                <!-- <p>กรุณากรอกรหัสผ่านใหม่</p> -->
+    <div class="forgot-photo">
+        <div class="form-container">
+            <div class="image-holder"></div>
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                    <h2 class="text-center"><strong>เปลี่ยนรหัสผ่านใหม่</strong></h2>
                     <?php 
-                        if(!empty($password_err)){
-                            echo '<div class="alert alert-danger">' . $password_err . '</div>';
+                        if(!empty($pass_err)){
+                            echo '<div class="alert alert-danger">' . $pass_err . '</div>';
                         }        
-                        ?>
-                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                    ?>
                     <div class="form-group">
                         <label >รหัสผ่านใหม่</label>
-                        <input type="password" class="form-control" id="Password" name="Password" placeholder="รหัสผ่าน">
+                        <input type="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" id="Password" name="Password" placeholder="">
+                        <span class="invalid-feedback"><?php echo $password_err; ?></span>
                     </div>
                     <div class="form-group">
                         <label >ยืนยันรหัสผ่านใหม่</label>
-                        <input type="password" class="form-control" id="ConPassword" name="ConPassword" placeholder="ยืนยันรหัสผ่าน">
+                        <input type="password" class="form-control <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>" id="ConPassword" name="ConPassword" placeholder="">
                         <span class="invalid-feedback"><?php echo $confirm_password_err; ?></span>
                     </div>
                     <div class="form-group">
-                        
-                            <button type="submit" class="btn btn-primary">ยืนยัน</button>
-                    
-                        </div>
+                        <button type="submit" class="btn btn-dark btn-block btn-dark">บันทึก</button>
+                    </div>
                 </form>
-            </div>
         </div>
     </div>
-</div>   
-<!-- </div>  -->
 </body>
 </html>

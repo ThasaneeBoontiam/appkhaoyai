@@ -8,7 +8,7 @@
  
         // Check if username is empty
         if(empty(trim($_POST["username"]))){
-            $username_err = "Please enter username.";
+            $username_err = "กรุณากรอกอีเมล";
         } else{
             $username = trim($_POST["username"]);
         }
@@ -72,27 +72,25 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/mystyle.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        body{ font: 14px sans-serif; }
-        .wrapper{ width: 360px; padding: 20px; }
-    </style>
 </head>
 <body>
-    <div class="d-flex justify-content-center">
-        <div class="wrapper">
-            <div class="card bg-light">
-                <div class="card-body">
-                    <div class="container">
-                        <h3>ลืมรหัสผ่าน?</h3>
-                        <p>กรุณากรอกอีเมลเพื่อยืนยันการเปลี่ยนรหัสผ่าน</p>
+<div class="forgot-photo">
+            <div class="form-container">
+                <div class="image-holder"></div>
+                        <!-- <h3>ลืมรหัสผ่าน?</h3>
+                        <p>กรุณากรอกอีเมลเพื่อยืนยันการเปลี่ยนรหัสผ่าน</p> -->
 
+                        
+                        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                        <h2 class="text-center"><strong>ลืมรหัสผ่าน?</strong></h2>
+                        <p><center>กรุณากรอกอีเมลเพื่อยืนยันการเปลี่ยนรหัสผ่าน</center></p>
                         <?php 
                         if(!empty($user_err)){
                             echo '<div class="alert alert-danger">' . $user_err . '</div>';
                         }        
                         ?>
-                        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                             <div class="form-group">
                                 <div class="input-group">
                                     <input type="email" id="username" name="username" placeholder="อีเมล" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>"  >
@@ -101,15 +99,13 @@
                             </div>
                             <div class="form-group">
                             <div class="text-center">
-                                <input type="submit" class="btn btn-primary " value="ดำเนินการต่อ">
-                                <input type="button" onclick="document.referrer ? window.location = document.referrer : history.back()" value="ย้อนกลับ" class='btn btn-danger btn-xs'>
+                                <input type="submit" class="btn btn-dark " value="ดำเนินการต่อ">
+                                <!-- <input type="button" onclick="document.referrer ? window.location = document.referrer : history.back()" value="ยกเลิก" class='btn btn-danger btn-xs'> -->
+                                <a href="login.php" class="btn btn-danger " role="button" >ยกเลิก</a>
                             </div>
                             </div>
                             </form>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
 </body>
 </html>

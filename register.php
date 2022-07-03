@@ -97,40 +97,37 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+    <link rel="stylesheet" href="css/mystyle.css">
     <title>Register</title>
-    <style>
-        body{ font: 14px sans-serif; }
-        .wrappers{ width: 360px; padding: 30px; }
-        
-    </style>
 </head>
 <body>
 
-<div class="d-flex justify-content-center">
-    <div class="wrappers">
-        <div class="card bg-light">
-            <div class="card-body">
-                <h2>ลงทะเบียน</h2>
-                <p>กรุณากรอกแบบฟอร์มนี้เพื่อสร้างบัญชี</p>
+
+        <div class="register-photo">
+            <div class="form-container">
+                <div class="image-holder"></div>
+                <!-- <h2>ลงทะเบียน</h2>
+                <p>กรุณากรอกแบบฟอร์มนี้เพื่อสร้างบัญชี</p> -->
                 
+                    
+                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class=" needs-validation" novalidate>
+                    <h2 class="text-center"><strong>ลงทะเบียน</strong></h2>
                     <?php 
                         if(!empty($password_err)){
                             echo '<div class="alert alert-danger">' . $password_err . '</div>';
                         }        
                     ?>
-                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class=" needs-validation" novalidate>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label >ชื่อ</label>
-                            <input type="text" class="form-control" id="Firstname" name="Firstname" aria-describedby="emailHelp" placeholder="ชื่อ" required>
+                            <input type="text" class="form-control" id="Firstname" name="Firstname" aria-describedby="emailHelp" placeholder="" required>
                             <div class="invalid-feedback">
                                 กรุณากรอกชื่อ
                             </div>
                         </div>
                         <div class="form-group col-md-6">
                             <label >นามสกุล</label>
-                            <input type="text" class="form-control" id="Lastname" name="Lastname" aria-describedby="emailHelp" placeholder="นามสกุล" required>
+                            <input type="text" class="form-control" id="Lastname" name="Lastname" aria-describedby="emailHelp" placeholder="" required>
                             <div class="invalid-feedback">
                                 กรุณากรอกนามสกุล
                             </div>
@@ -139,21 +136,21 @@
 
                     <div class="form-group">
                         <label >อีเมล</label>
-                        <input type="email" class="form-control" id="Usertname" name="Usertname" aria-describedby="emailHelp" placeholder="อีเมล" required>
+                        <input type="email" class="form-control" id="Usertname" name="Usertname" aria-describedby="emailHelp" placeholder="" required>
                         <div class="invalid-feedback">
                             กรุณากรอกอีเมล
                         </div>
                     </div>
                     <div class="form-group">
                         <label >รหัสผ่าน</label>
-                        <input type="password" class="form-control" id="Password" name="Password" placeholder="รหัสผ่าน" required>
+                        <input type="password" class="form-control" id="Password" name="Password" placeholder="" required>
                         <div class="invalid-feedback">
                             กรุณากรอกรหัสผ่าน
                         </div>
                     </div>
                     <div class="form-group">
                         <label >ยืนยันรหัสผ่าน</label>
-                        <input type="password" class="form-control" id="ConPassword" name="ConPassword" placeholder="ยืนยันรหัสผ่าน" required>
+                        <input type="password" class="form-control" id="ConPassword" name="ConPassword" placeholder="" required>
                         <span class="invalid-feedback"><?php echo $confirm_password_err; ?></span>
                         <div class="invalid-feedback">
                             กรุณากรอกยืนยันรหัสผ่าน
@@ -161,27 +158,30 @@
                     </div>
                     <div class="form-group">
                         <label >หน่วยงาน</label>
-                        <input type="text" class="form-control" id="Agency" name="Agency" placeholder="ชื่อหน่วยงาน" required>
+                        <input type="text" class="form-control" id="Agency" name="Agency" placeholder="" required>
                         <div class="invalid-feedback">
                             กรุณากรอกหน่วยงาน
                         </div>
                     </div>
                     <div class="form-group">
                         <label >ตำแหน่ง</label>
-                        <input type="text" class="form-control" id="Rank" name="Rank" placeholder="ตำแหน่ง" required>
+                        <input type="text" class="form-control" id="Rank" name="Rank" placeholder="" required>
                         <div class="invalid-feedback">
                             กรุณากรอกตำแหน่ง
                         </div>
 
                     </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-dark btn-block btn-dark" value="ลงทะเบียน">
+                    </div>
 
-                    <button type="submit" class="btn btn-primary">ยืนยัน</button><br><br>
-                    <p>มีบัญชีอยู่แล้ว? <a href="login.php">เข้าสู่ระบบ</a></p>
+                    <!-- <button type="submit" class="btn btn-primary">ยืนยัน</button><br><br> -->
+                    <p><center>มีบัญชีอยู่แล้ว? <a href="login.php">เข้าสู่ระบบ</a></center></p>
                 </form>
-            </div>
+            
         </div>
     </div>
-</div>
+
 
 
     

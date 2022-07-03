@@ -19,7 +19,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
  
     // Check if username is empty
     if(empty(trim($_POST["username"]))){
-        $username_err = "Please enter username.";
+        $username_err = "Please enter Email.";
     } else{
         $username = trim($_POST["username"]);
     }
@@ -71,12 +71,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             // Password is correct, so start a new session
                         } else{
                             // Password is not valid, display a generic error message
-                            $login_err = "Invalid username or password.";
+                            $login_err = "อีเมล หรือ รหัสผ่านไม่ถูกต้อง";
                         }
                     }
                 } else{
                     // Username doesn't exist, display a generic error message
-                    $login_err = "Invalid username or password.";
+                    $login_err = "อีเมล หรือ รหัสผ่านไม่ถูกต้อง";
                 }
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
@@ -103,45 +103,40 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        body{ font: 14px sans-serif; }
-        .wrapper{ width: 360px; padding: 20px; }
-    </style>
+    <link rel="stylesheet" href="css/mystyle.css">
+    
 </head>
 <body>
-    <div class="d-flex justify-content-center">
-        <div class="wrapper">
-            <div class="card bg-light">
-                <div class="card-body">
-                    <h2>เข้าสู่ระบบ</h2>
-                    <p>กรุณากรอกข้อมูลเพื่อเข้าสู่ระบบ</p>
-
-                    <?php 
-                    if(!empty($login_err)){
-                        echo '<div class="alert alert-danger">' . $login_err . '</div>';
-                    }        
-                    ?>
-
+    <div class="wrappers">
+        <div class="login-photo">
+            <div class="form-container">
+                <div class="image-holder"></div>
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                        <h2 class="text-center"><strong>เข้าสู่ระบบ</strong></h2>
+                        <?php 
+                        if(!empty($login_err)){
+                            echo '<div class="alert alert-danger">' . $login_err . '</div>';
+                        }        
+                        ?>
                         <div class="form-group">
-                            <label>ชื่อผู้ใช้</label>
-                            <input type="email" name="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>" placeholder="ชื่อผู้ใช้">
+                            <!-- <label>ชื่อผู้ใช้</label> -->
+                            <input type="email" name="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>" placeholder="อีเมล">
                             <span class="invalid-feedback"><?php echo $username_err; ?></span>
                         </div>    
                         <div class="form-group">
-                            <label>รหัสผ่าน</label>
+                            <!-- <label>รหัสผ่าน</label> -->
                             <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" placeholder="รหัสผ่าน">
                             <span class="invalid-feedback"><?php echo $password_err; ?></span>
                         </div>
-                        <p><a href="forgot.php">ลืมรหัสผ่าน?</a>
+                        <div align="right">
+                            <p><a href="forgot.php" class="text-primary">ลืมรหัสผ่าน?</a>
+                        </div>
                         <div class="form-group">
-                            <input type="submit" class="btn btn-primary btn-lg btn-block" value="เข้าสู่ระบบ">
+                            <input type="submit" class="btn btn-dark btn-block btn-dark" value="เข้าสู่ระบบ">
                         </div>
                         <p><center>ยังไม่มีบัญชี? <a href="register.php">สมัครเลย</a></center></p>
-                </form>
-                </div>
+                    </form>
             </div>
-            
         </div>
     </div>
 </body>

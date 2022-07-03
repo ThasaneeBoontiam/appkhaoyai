@@ -174,29 +174,29 @@
                         
                         <div class="form-group">
                             <div class="text-center">
-                                <input type="button" value="บันทึก" class="btn btn-primary" onclick="" data-toggle="modal" data-target="#PopupModal"></input>
+                                <input type="submit" name="submit" id="submit" value="บันทึก" class="btn btn-primary" onclick="" data-toggle="modal" data-target="#PopupModal"></input>
                                 <input type="button" onclick="document.referrer ? window.location = document.referrer : history.back()" value="ย้อนกลับ" class='btn btn-danger btn-xs'>
                             </div>
                         </div>
 
                         <!-- POPUP Modal-->
-                        <div class="modal fade" id="PopupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <!-- <div class="modal fade" id="PopupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel">รูปแบบรายงาน</h5>
                                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">×</span>
+                                        <span aria-hidden="true"></span>
                                     </button>
                                     </div>
-                                    <div class="modal-body"><label name="ShowMessage" id="ShowMessage"></label></div>
+                                    <div class="modal-body"><p id="ShowMessage"></p></div>
                                     <div class="modal-footer">
                                         <button type="submit" class="btn btn-success">ยืนยัน</button>
                                         <button class="btn btn-danger btn-xs" type="button" data-dismiss="modal">ยกเลิก</button>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                     </form>
                 </div>
@@ -235,6 +235,43 @@
                 } 
             }
         }
+
+        // $("#submit").click(function () {
+        //     var date = date_thai($('#date').val());
+        //     var province = $('#province').val();
+        //     var subarea;
+        //     var area;
+        //     console.log(province);
+        //     var location = $('#location').val() + " ต." +$('#districts').val();
+        //     var message = "เรียนหัวหน้าอุทยานแห่งชาติเขาใหญ่ <br><br>";
+        //     message +="หน่วย <?=$_SESSION["agency"]?> เมื่อวันที่ "+ date +" ออกตรวจเฝ้าระวังและผลักดันช้างป่าออกหากินออกนอกเขตพื้นที่อุทยานแห่งชาติเขาใหญ่";
+            
+        //     <?php
+        //         $idpro = "<script>document.writeln(province);</script>";
+        //         $sqlprovinces = "SELECT `name_pr` FROM `tb_province` WHERE `id` = '$idpro'";
+        //         $res = mysqli_query($conn, $sqlprovinces);
+        //         foreach ($res as $value){
+        //     ?>
+        //         message += "บริเวณท้องที่ "+ $('#location').val() + " ต.<?=$value['name_pr'];?>";
+        //     <?php
+        //         }
+        //         ?>
+        //     <?php
+        //         $sqlarea = "SELECT `name_ar` FROM `tb_area` WHERE `id` = '$area_id'";
+        //         $res = mysqli_query($conn, $sqlarea);
+        //         $area="";
+        //         foreach ($res as $value){
+        //             $area = $value['name_ar'];
+        //         }
+        //         $sqlsubarea = "SELECT `name_sub` FROM `tb_subarea` WHERE `id` = '$subarea_id'";
+        //         $res = mysqli_query($conn, $sqlsubarea);
+        //         $subarea="";
+        //         foreach ($res as $value){
+        //             $subarea = $value['name_sub'];
+        //         }
+        //     ?>
+        //     document.getElementById("ShowMessage").innerHTML = message;
+        // });
     
 		/////////									
 		function getLocation() {
@@ -378,6 +415,33 @@
                 const zdef = `+proj=utm +zone=${utm_zone} +datum=WGS84 +units=m +no_defs`;
                 return zdef;
             }
+        }
+        
+        function date_thai(date_in){
+            const  month_arr = ["",
+                            "มกราคม",
+                            "กุมภาพันธ์",
+                            "มีนาคม",
+                            "เมษายน",
+                            "พฤษภาคม",
+                            "มิถุนายน",
+                            "กรกฏาคม",
+                            "สิงหาคม",
+                            "กันยายน",
+                            "ตุลาคม",
+                            "พฤศจิกายน",
+                            "ธันวาคม" ] ; //กำหนด อาร์เรย์ $month_arr  เพื่อเก็บ ชื่อเดือน ของไทย
+            
+            var year = date_in.substr(0, 4);
+            var month = date_in.substr(5, 2);
+            var day;
+            if((date_in.substr(8, 1)) == "0")
+                day = date_in.substr(9, 1);
+            else
+                day = date_in.substr(8, 2);
+            month = month_arr[parseInt(month)];
+            var date = day + " " + month + " " + (parseInt(year)+543);
+            return date;
         }
 	</script>
 <?php

@@ -217,6 +217,7 @@
         $response['status']=200;
         $response['message']="Inavalid or data not found";
     }
+
     if(isset($_FILES['upload'])){
         $date = ($_POST['date']);
         $time = "{$_POST["time"]}น.";
@@ -318,7 +319,7 @@
         }
         else{
             $damage = "เบื้องต้นพบ";
-            for ($i=2; $i < 10; $i++) { 
+            for ($i=2; $i < 9; $i++) { 
                 if($_POST["$i"] == 'on'){
                     $sql = "SELECT `damage` FROM `tb_damage` WHERE `id` = '$i'";
                     $res = mysqli_query($conn, $sql);
@@ -327,6 +328,8 @@
                         $damage .= " {$value['damage']} {$_POST["$txt"]}";
                     }
                 }
+            }if($_POST['9'] == 'on'){
+                $damage .= strtr ( " {$_POST['text_9']}", "\n", " " );
             }
         }
         
@@ -338,7 +341,7 @@
         $token = "G0lqw73joxZ1Si2e4MuPOfb50puNSm3KyK3k1jlfpQr" ; // LINE Token
         //Message
         $mymessage = "\nเรียนหัวหน้าอุทยานแห่งชาติเขาใหญ่\n\n"; //Set new line with '\n'
-        $mymessage .= "{$_SESSION["agency"]} เมื่อวันที่ $date ออกตรวจเฝ้าระวังและผลักดันช้างป่าออกหากินออกนอกเขตพื้นที่อุทยานแห่งชาติเขาใหญ่";
+        $mymessage .= "หน่วย {$_SESSION["agency"]} เมื่อวันที่ $date ออกตรวจเฝ้าระวังและผลักดันช้างป่าออกหากินออกนอกเขตพื้นที่อุทยานแห่งชาติเขาใหญ่";
         $mymessage .= "บริเวณท้องที่ $location ต.$subarea อ.$area จ.$province\n\n";
         $mymessage .= "เวลา $time พบช้างป้า $numele ตัว ($nameele) ออกมาหากินนอกเขตอุทยานฯบริเวณท้องที่ $location $coordinates $damage \n\n";
         $mymessage .= "{$_SESSION["fname"]} {$_SESSION["lname"]}\n";
@@ -347,6 +350,7 @@
         $imageFile = new CURLFILE('img/uploads/2_4.png'); // Local Image file Path
         // $sticker_package_id = '2';  // Package ID sticker
         // $sticker_id = '34';    // ID sticker
+        echo $mymessage;
         $data = array (
             'message' => $mymessage,
             'imageFile' => $imageFile
@@ -518,14 +522,14 @@
     // Check if the user is logged in, if not then redirect him to login page
     if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
         if($_SESSION["status"] == "User"){
-            // header("Location: add_data.php");
+            header("Location: add_data.php");
         }
         elseif($_SESSION["status"] == "Admin"){
-            // header("Location: home.php");
+            header("Location: home.php");
         }
         exit();
     }else {
-        // header("Location: login.php");
+        header("Location: login.php");
         exit();
     }
 
