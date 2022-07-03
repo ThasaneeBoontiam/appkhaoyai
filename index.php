@@ -235,8 +235,8 @@
         $location_out_x = ($_POST['location_out_N']);
         $location_out_y = ($_POST['location_out_E']);
         $location = ($_POST['location']);
-        $x = ($_POST['N']);
-        $y = ($_POST['E']);
+        $x = ($_POST['E']);
+        $y = ($_POST['N']);
 
         // $sqlcount = "SELECT `name` COUNT FROM `tb_elephant` WHERE `name` = '$ele_name'";
         // $rescount = mysqli_query($conn, $sqlcount);
