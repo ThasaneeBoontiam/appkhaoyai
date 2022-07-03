@@ -151,6 +151,21 @@ const  month_arr = ["",
         });
     });
 
+    // $('#day_imglist').change(function(){
+    //     var ele_img = $('#ele_imglist').val();
+    //     var years = $('#years_imglist').val();
+    //     var month = $('#month_imglist').val();
+    //     var day = $(this).val();
+    //     $.ajax({
+    //         type: "post",
+    //         url: "index.php",
+    //         data: {ele_img:ele_img,years:years,month:month,day:day,function:'time_imglist'},
+    //         success: function(data){
+    //             $('#time_imglist').html(data);
+    //         }
+    //     });
+    // });
+
     $('#day_imglist').change(function(){
         var ele_img = $('#ele_imglist').val();
         var years = $('#years_imglist').val();
@@ -159,28 +174,28 @@ const  month_arr = ["",
         $.ajax({
             type: "post",
             url: "index.php",
-            data: {ele_img:ele_img,years:years,month:month,day:day,function:'time_imglist'},
-            success: function(data){
-                $('#time_imglist').html(data);
-            }
-        });
-    });
-
-    $('#time_imglist').change(function(){
-        var ele_img = $('#ele_imglist').val();
-        var years = $('#years_imglist').val();
-        var month = $('#month_imglist').val();
-        var day = $('#day_imglist').val();
-        var time = $(this).val();
-        $.ajax({
-            type: "post",
-            url: "index.php",
-            data: {ele_img:ele_img,years:years,month:month,day:day,time:time,function:'show_imglist'},
+            data: {ele_img:ele_img,years:years,month:month,day:day,function:'show_imglist'},
             success: function(data){
                 $('#out_imglist').html(data);
             }
         });
     });
+
+    // $('#time_imglist').change(function(){
+    //     var ele_img = $('#ele_imglist').val();
+    //     var years = $('#years_imglist').val();
+    //     var month = $('#month_imglist').val();
+    //     var day = $('#day_imglist').val();
+    //     var time = $(this).val();
+    //     $.ajax({
+    //         type: "post",
+    //         url: "index.php",
+    //         data: {ele_img:ele_img,years:years,month:month,day:day,time:time,function:'show_imglist'},
+    //         success: function(data){
+    //             $('#out_imglist').html(data);
+    //         }
+    //     });
+    // });
     
     function ExportToExcel(fileExtension,fileName) {
         var fileName = "รายงานช้างออกเดือน " + month_arr[$('#month_datalist').val()] + " " + (parseInt($('#years_datalist').val())+543);

@@ -177,8 +177,9 @@
         $years = $_POST['years'];
         $month = $_POST['month'];
         $day = $_POST['day'];
-        $timeimg = $_POST['time'];
-        $sql = "SELECT image FROM tb_image WHERE name_ele='$ele_img' AND YEAR(date)=$years AND MONTH(date)=$month AND DAY(date)=$day AND timeimg='$timeimg'";
+        // $timeimg = $_POST['time'];
+        // $sql = "SELECT image FROM tb_image WHERE name_ele='$ele_img' AND YEAR(date)=$years AND MONTH(date)=$month AND DAY(date)=$day AND timeimg='$timeimg'";
+        $sql = "SELECT image FROM tb_image WHERE name_ele='$ele_img' AND YEAR(date)=$years AND MONTH(date)=$month AND DAY(date)=$day";
         $query = mysqli_query($conn, $sql);
         $number = 1;
         echo '
@@ -195,7 +196,7 @@
             echo '<tbody>
             <tr scope="row" >
             <th scope="row" width="10%" >'.$number.'</th>
-            <td><img src= "uploads/'.$value["image"].'" width="300px" height="200px" alt=""></td>
+            <td><img src= "img/uploads/'.$value["image"].'" width="300px" height="200px" alt=""></td>
             </tr> </tbody>';
             ++$number;
         }

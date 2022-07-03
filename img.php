@@ -35,11 +35,11 @@
                 <select name="day_imglist" id="day_imglist" class="form-control">
                 </select>
             </div>
-            <div class="form-group col-md-2" align="left">
+            <!-- <div class="form-group col-md-2" align="left">
                 <label>เวลา:</label>
                 <select name="time_imglist" id="time_imglist" class="form-control">
                 </select>
-            </div>
+            </div> -->
 
         </div>
         <div class="table-responsive text-nowrap">
