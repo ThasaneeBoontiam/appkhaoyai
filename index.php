@@ -179,17 +179,16 @@
         $day = $_POST['day'];
         // $timeimg = $_POST['time'];
         // $sql = "SELECT image FROM tb_image WHERE name_ele='$ele_img' AND YEAR(date)=$years AND MONTH(date)=$month AND DAY(date)=$day AND timeimg='$timeimg'";
-        $sql = "SELECT image FROM tb_image WHERE name_ele='$ele_img' AND YEAR(date)=$years AND MONTH(date)=$month AND DAY(date)=$day";
+        $sql = "SELECT * FROM tb_image WHERE name_ele='$ele_img' AND YEAR(date)=$years AND MONTH(date)=$month AND DAY(date)=$day";
         $query = mysqli_query($conn, $sql);
         $number = 1;
         echo '
         <thead class="thead-dark">
-
             <tr>
-                <th >ลำดับที่</th>
-                <th >เวลา</th>
+                <th><h6>ลำดับที่</h6></th>
+                <th><h6>เวลา</h6></th>
                 <th style="text-align:center" scope="col">
-                    '.$ele_img.'
+                    <h6>ภาพช้าง '.$ele_img.'</h6>
                 </th>  
             </tr>
         </thead>
@@ -198,8 +197,8 @@
         foreach ($query as $value)  {
             echo '<tbody>
             <tr scope="row" >
-            <th scope="row" width="10%" >'.$number.'</th>
-            <td><?php echo test; ?></td>
+            <th width="10%" >'.$number.'</th>
+            <td><h7>'.$value["timeimg"].'</h7></td>
             <td><img class="zoom" src= "img/uploads/'.$value["image"].'" alt=""></td>
             </tr> </tbody>';
             ++$number;
