@@ -184,10 +184,13 @@
         $number = 1;
         echo '
         <thead class="thead-dark">
+
             <tr>
-                <th style="text-align:center" scope="col" colspan="2">
+                <th >ลำดับที่</th>
+                <th >เวลา</th>
+                <th style="text-align:center" scope="col">
                     '.$ele_img.'
-                </th>
+                </th>  
             </tr>
         </thead>
         ';
@@ -196,7 +199,8 @@
             echo '<tbody>
             <tr scope="row" >
             <th scope="row" width="10%" >'.$number.'</th>
-            <td><img src= "img/uploads/'.$value["image"].'" width="300px" height="200px" alt=""></td>
+            <td><?php echo test; ?></td>
+            <td><img class="zoom" src= "img/uploads/'.$value["image"].'" alt=""></td>
             </tr> </tbody>';
             ++$number;
         }

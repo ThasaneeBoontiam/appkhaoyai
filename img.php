@@ -7,6 +7,21 @@
     $query=mysqli_query($conn,$mysql);
 ?>
 <!-- **************************************************************** -->
+<style>
+.zoom {
+    width: auto;
+    height: 100px;
+    cursor: pointer;
+    -webkit-transition-property: all;
+    -webkit-transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease;
+}
+
+.zoom:hover {
+    transform: scale(2);
+}
+</style>
+
 <div class="container">
     <h2 align="center">รูปภาพช้าง</h2></br></br>
     <form>
