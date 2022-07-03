@@ -90,7 +90,7 @@
     if (isset($_POST['function']) && $_POST['function'] == 'show_datalist') {
         $month = $_POST['month'];
         $years = $_POST['years'];
-        $sql=" SELECT * FROM tb_show,tb_province,tb_area,tb_subarea WHERE tb_show.province_id=tb_province.id AND tb_show.area_id=tb_area.id AND tb_show.subarea_id=tb_subarea.id AND YEAR(tb_show.date)='$years' AND MONTH(tb_show.date)='$month'";
+        $sql=" SELECT * FROM tb_show WHERE  YEAR(tb_show.date)='$years' AND MONTH(tb_show.date)='$month'";
         $query = mysqli_query($conn, $sql);
         $number = 1;
         echo '
@@ -256,7 +256,22 @@
         if($_POST['1'] != 'on'){
             $_POST['text_1'] = "";
         }
-        
+
+        $sqlprovince = "SELECT `name_pr` FROM `tb_province` WHERE id = '$province_id'";
+        $resprovince = mysqli_query($conn,$sqlprovince);
+        $resprovince = mysqli_fetch_assoc($resprovince);
+        $province = $resprovince['name_pr'];
+
+        $sqlamphures = "SELECT `name_ar` FROM `tb_area` WHERE id = '$area_id'";
+        $resamphures = mysqli_query($conn,$sqlamphures);
+        $resamphures = mysqli_fetch_assoc($resamphures);
+        $amphures = $resamphures['name_ar'];
+
+        $sqldistricts = "SELECT `name_sub` FROM `tb_subarea` WHERE id = '$subarea_id'";
+        $resdistricts = mysqli_query($conn,$sqldistricts);
+        $resdistricts = mysqli_fetch_assoc($resdistricts);
+        $districts = $resdistricts['name_sub'];
+
         $nameele="";
         $damage = "";
         $numele=0;
@@ -264,7 +279,7 @@
             foreach ($ele_name as $key => $value) {
                 print_r($ele_name[$key]);
                 $sql_add = "INSERT INTO `tb_show`(`id`, `name_user`, `agency`, `rank`, `date`, `time`, `province_id`, `area_id`, `subarea_id`, `num_ele`, `ele_name`, `location_in_x`, `location_in_y`, `location_out_x`, `location_out_y`, `location`, `no_damage`, `property`, `banana`, `sugarcane`, `sweetcorn`, `coconut`, `jackfruit`, `mak`, `other`, `location_damage_E`, `location_damage_N`)
-                                        VALUES ( NULL, '{$_SESSION["fname"]} {$_SESSION["lname"]}', '{$_SESSION["agency"]}', '{$_SESSION["rank"]}', '$date', '$time', '$province_id', '$area_id', '$subarea_id', '$num_ele', '$value', '$location_in_x', '$location_in_y', '$location_out_x', '$location_out_y', '$location', '{$_POST['text_1']}', '{$_POST['text_2']}', '{$_POST['text_3']}', '{$_POST['text_4']}', '{$_POST['text_5']}', '{$_POST['text_6']}', '{$_POST['text_7']}', '{$_POST['text_8']}', '{$_POST['text_9']}', '$y', '$x')";
+                                        VALUES ( NULL, '{$_SESSION["fname"]} {$_SESSION["lname"]}', '{$_SESSION["agency"]}', '{$_SESSION["rank"]}', '$date', '$time', '$province', '$amphures', '$districts', '$num_ele', '$value', '$location_in_x', '$location_in_y', '$location_out_x', '$location_out_y', '$location', '{$_POST['text_1']}', '{$_POST['text_2']}', '{$_POST['text_3']}', '{$_POST['text_4']}', '{$_POST['text_5']}', '{$_POST['text_6']}', '{$_POST['text_7']}', '{$_POST['text_8']}', '{$_POST['text_9']}', '$y', '$x')";
                 mysqli_query($conn,$sql_add) or die ("Error in query: $sql_add " . mysqli_error());
                 $nameele .=" '$value' ";
                 $numele+=$num_ele;
@@ -282,7 +297,7 @@
             }
 
             $sql_add = "INSERT INTO `tb_show`(`id`, `name_user`, `agency`, `rank`, `date`, `time`, `province_id`, `area_id`, `subarea_id`, `num_ele`, `ele_name`, `location_in_x`, `location_in_y`, `location_out_x`, `location_out_y`, `location`, `no_damage`, `property`, `banana`, `sugarcane`, `sweetcorn`, `coconut`, `jackfruit`, `mak`, `other`, `location_damage_N`, `location_damage_E`)
-                        VALUES ( NULL, '{$_SESSION["fname"]} {$_SESSION["lname"]}', '{$_SESSION["agency"]}', '{$_SESSION["rank"]}', '$date', '$time', '$province_id', '$area_id', '$subarea_id', '{$_POST['inset_num_ele']}', '{$_POST['insert_ele']}', '$location_in_x', '$location_in_y', '$location_out_x', '$location_out_y', '$location', '{$_POST['text_1']}', '{$_POST['text_2']}', '{$_POST['text_3']}', '{$_POST['text_4']}', '{$_POST['text_5']}', '{$_POST['text_6']}', '{$_POST['text_7']}', '{$_POST['text_8']}', '{$_POST['text_9']}', '$x', '$y')";
+                        VALUES ( NULL, '{$_SESSION["fname"]} {$_SESSION["lname"]}', '{$_SESSION["agency"]}', '{$_SESSION["rank"]}', '$date', '$time', '$province', '$amphures', '$districts', '{$_POST['inset_num_ele']}', '{$_POST['insert_ele']}', '$location_in_x', '$location_in_y', '$location_out_x', '$location_out_y', '$location', '{$_POST['text_1']}', '{$_POST['text_2']}', '{$_POST['text_3']}', '{$_POST['text_4']}', '{$_POST['text_5']}', '{$_POST['text_6']}', '{$_POST['text_7']}', '{$_POST['text_8']}', '{$_POST['text_9']}', '$x', '$y')";
             mysqli_query($conn,$sql_add) or die ("Error in query: $sql_add " . mysqli_error());
 
             $nameele .= " '" + $_POST['insert_ele'] + "' ";
@@ -297,25 +312,6 @@
                                 VALUES (NULL, '$nameele','$date','$time', '$new_name')";
                 mysqli_query($conn, $sqlimage);
             }
-        }
-
-        $sql = "SELECT `name_pr` FROM `tb_province` WHERE `id` = '$province_id'";
-        $res = mysqli_query($conn, $sql);
-        $province="";
-        foreach ($res as $value){
-            $province = $value['name_pr'];
-        }
-        $sql = "SELECT `name_ar` FROM `tb_area` WHERE `id` = '$area_id'";
-        $res = mysqli_query($conn, $sql);
-        $area="";
-        foreach ($res as $value){
-            $area = $value['name_ar'];
-        }
-        $sql = "SELECT `name_sub` FROM `tb_subarea` WHERE `id` = '$subarea_id'";
-        $res = mysqli_query($conn, $sql);
-        $subarea="";
-        foreach ($res as $value){
-            $subarea = $value['name_sub'];
         }
 
         $date = show_tdate($date);
@@ -347,8 +343,9 @@
         //Message
         $mymessage = "\nเรียนหัวหน้าอุทยานแห่งชาติเขาใหญ่\n\n"; //Set new line with '\n'
         $mymessage .= "หน่วย {$_SESSION["agency"]} เมื่อวันที่ $date ออกตรวจเฝ้าระวังและผลักดันช้างป่าออกหากินออกนอกเขตพื้นที่อุทยานแห่งชาติเขาใหญ่";
-        $mymessage .= "บริเวณท้องที่ $location ต.$subarea อ.$area จ.$province\n\n";
-        $mymessage .= "เวลา $time พบช้างป้า $numele ตัว ($nameele) ออกมาหากินนอกเขตอุทยานฯบริเวณท้องที่ $location $coordinates $damage \n\n";
+        $mymessage .= "บริเวณท้องที่ $location ต.$districts อ.$amphures จ.$province\n\n";
+        $mymessage .= "เวลา $time พบช้างป้า $numele ตัว\n";
+        $mymessage .= "($nameele) ออกมาหากินนอกเขตอุทยานฯบริเวณท้องที่ $location $coordinates $damage \n\n";
         $mymessage .= "{$_SESSION["fname"]} {$_SESSION["lname"]}\n";
         $mymessage .= "{$_SESSION["rank"]}\n";
         $mymessage .= "ผู้รายงาน\n";
@@ -371,14 +368,14 @@
     }
 
     if(isset($_POST['function']) == 'LineNoti'){
-        $sql = "SELECT * FROM `tb_show` WHERE `date` = SUBSTRING(DATE_ADD(NOW(), INTERVAL -1 DAY), 1, 10)";
-        $query = mysqli_query($conn, $sql);
+        // $sql = "SELECT * FROM `tb_show` WHERE `date` = SUBSTRING(DATE_ADD(NOW(), INTERVAL -1 DAY), 1, 10)";
+        // $query = mysqli_query($conn, $sql);
 
             $token = "G0lqw73joxZ1Si2e4MuPOfb50puNSm3KyK3k1jlfpQr" ; // LINE Token
             //Message
             $mymessage = "\nเรียนหัวหน้าอุทยานแห่งชาติเขาใหญ่ \n\n"; //Set new line with '\n'
             // $sql = "SELECT DISTINCT `date` FROM `tb_show` WHERE `date` = SUBSTRING(DATE_ADD(NOW(), INTERVAL -1 DAY), 1, 10)";
-            $sql = "SELECT DISTINCT `date` FROM `tb_show` WHERE `date` = '2022-06-29'";
+            $sql = "SELECT DISTINCT `date` FROM `tb_show` WHERE `date` = SUBSTRING(DATE_ADD(NOW(), INTERVAL -1 DAY), 1, 10)";
             $resday = mysqli_query($conn, $sql);
             $resday = mysqli_fetch_assoc($resday);
 
