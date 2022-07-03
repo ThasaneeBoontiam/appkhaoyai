@@ -97,43 +97,43 @@
         <thead class="thead-dark">
             <tr>
                 <th scope="col" colspan="26">
-                รายงานผลการปรากฎตัวของช้างป่าออกหากินนอกพื้นที่อุทยานแห่งชาติเขาใหญ่
-                    ประจำเดือน '.$month_arr[$month].' พ.ศ. '.((int)$years + 543).'
+                <h5>รายงานผลการปรากฎตัวของช้างป่าออกหากินนอกพื้นที่อุทยานแห่งชาติเขาใหญ่
+                    ประจำเดือน '.$month_arr[$month].' พ.ศ. '.((int)$years + 543).'</h5>
                 </th>
             </tr>
             <tr style="text-align:center"; "vertical-align:middle"; >
-                <th style="vertical-align:middle" scope="col"  rowspan="2" >ลำดับที่</th>
-                <th style="vertical-align:middle" scope="col"  rowspan="2">ว/ด/ป</th>
-                <th style="vertical-align:middle" scope="col"  rowspan="2">เวลา</th>
-                <th style="vertical-align:middle" scope="col"  rowspan="2">จังหวัด</th>
-                <th style="vertical-align:middle" scope="col"  rowspan="2">อำเภอ</th>
-                <th style="vertical-align:middle" scope="col"  rowspan="2">ตำบล</th>
-                <th style="vertical-align:middle" scope="col"  rowspan="2">จำนวน(ตัว)</th>
-                <th style="vertical-align:middle" scope="col"  rowspan="2">ชื่อช้าง</th>
-                <th scope="col" colspan="2" >ช้างเข้าพิกัด</th>
-                <th scope="col" colspan="2" >ช้างออกพิกัด</th>
-                <th style="vertical-align:middle" scope="col"  rowspan="2">สถานที่</th>
-                <th scope="col" colspan="9" >ความเสียหาย</th>
-                <th scope="col" colspan="2" >พิกัด ความเสียหาย</th>
-                <th style="vertical-align:middle" scope="col"  rowspan="2">ผู้บันทึก</th>
-                <th style="vertical-align:middle" scope="col"  rowspan="2">หน่วยงาน</th>
+                <th style="vertical-align:middle" scope="col"  rowspan="2" ><h7>ลำดับที่</h7></th>
+                <th style="vertical-align:middle" scope="col"  rowspan="2"><h7>ว/ด/ป</h7></th>
+                <th style="vertical-align:middle" scope="col"  rowspan="2"><h7>เวลา</h7></th>
+                <th style="vertical-align:middle" scope="col"  rowspan="2"><h7>จังหวัด</h7></th>
+                <th style="vertical-align:middle" scope="col"  rowspan="2"><h7>อำเภอ</h7></th>
+                <th style="vertical-align:middle" scope="col"  rowspan="2"><h7>ตำบล</h7></th>
+                <th style="vertical-align:middle" scope="col"  rowspan="2"><h7>จำนวน</h7>(ตัว)</th>
+                <th style="vertical-align:middle" scope="col"  rowspan="2"><h7>ชื่อช้าง</h7></th>
+                <th scope="col" colspan="2" ><h7>ช้างเข้าพิกัด</h7></th>
+                <th scope="col" colspan="2" ><h7>ช้างออกพิกัด</h7></th>
+                <th style="vertical-align:middle" scope="col"  rowspan="2"><h7>สถานที่</h7></th>
+                <th scope="col" colspan="9" ><h7>ความเสียหาย</h7></th>
+                <th scope="col" colspan="2" ><h7>พิกัดความเสียหาย</h7></th>
+                <th style="vertical-align:middle" scope="col"  rowspan="2"><h7>ผู้บันทึก</h7></th>
+                <th style="vertical-align:middle" scope="col"  rowspan="2"><h7>หน่วยงาน</h7></th>
             </tr>
             <tr style="text-align:center">
-                <th style="vertical-align:middle" scope="col" >E</th>
-                <th style="vertical-align:middle" scope="col" >N</th>
-                <th style="vertical-align:middle" scope="col" >E</th>
-                <th style="vertical-align:middle" scope="col" >N</th>
-                <th style="vertical-align:middle" scope="col" >ไม่พบความเสียหาย</th>
-                <th style="vertical-align:middle" scope="col" >ทรัพย์สิน</th>
-                <th style="vertical-align:middle" scope="col" >กล้วย</th>
-                <th style="vertical-align:middle" scope="col" >อ้อย</th>
-                <th style="vertical-align:middle" scope="col" >ข้าวโพด</th>
-                <th style="vertical-align:middle" scope="col" >มะพร้าว</th>
-                <th style="vertical-align:middle" scope="col" >ขนุน</th>
-                <th style="vertical-align:middle" scope="col" >หมาก</th>
-                <th style="vertical-align:middle" scope="col" >อื่นๆ</th>
-                <th style="vertical-align:middle" scope="col">E</th>
-                <th style="vertical-align:middle" scope="col">N</th>
+                <th style="vertical-align:middle" scope="col" ><h7>E</h7></th>
+                <th style="vertical-align:middle" scope="col" ><h7>N</h7></th>
+                <th style="vertical-align:middle" scope="col" ><h7>E</h7></th>
+                <th style="vertical-align:middle" scope="col" ><h7>N</h7></th>
+                <th style="vertical-align:middle" scope="col" ><h7>ไม่พบความเสียหา</h7>ย</th>
+                <th style="vertical-align:middle" scope="col" ><h7>ทรัพย์สิน</h7></th>
+                <th style="vertical-align:middle" scope="col" ><h7>กล้ว</h7>ย</th>
+                <th style="vertical-align:middle" scope="col" ><h7>อ้อย</h7></th>
+                <th style="vertical-align:middle" scope="col" ><h7>ข้าวโพด</h7></th>
+                <th style="vertical-align:middle" scope="col" ><h7>มะพร้าว</h7></th>
+                <th style="vertical-align:middle" scope="col" ><h7>ขนุน</h7></th>
+                <th style="vertical-align:middle" scope="col" ><h7>หมาก</h7></th>
+                <th style="vertical-align:middle" scope="col" ><h7>อื่นๆ</h7></th>
+                <th style="vertical-align:middle" scope="col"><h7>E</h7></th>
+                <th style="vertical-align:middle" scope="col"><h7>N</h7></th>
             </tr>
         </thead>
         ';
@@ -177,16 +177,20 @@
         $years = $_POST['years'];
         $month = $_POST['month'];
         $day = $_POST['day'];
-        $timeimg = $_POST['time'];
-        $sql = "SELECT image FROM tb_image WHERE name_ele='$ele_img' AND YEAR(date)=$years AND MONTH(date)=$month AND DAY(date)=$day AND timeimg='$timeimg'";
+        // $timeimg = $_POST['time'];
+        // $sql = "SELECT image FROM tb_image WHERE name_ele='$ele_img' AND YEAR(date)=$years AND MONTH(date)=$month AND DAY(date)=$day AND timeimg='$timeimg'";
+        $sql = "SELECT image FROM tb_image WHERE name_ele='$ele_img' AND YEAR(date)=$years AND MONTH(date)=$month AND DAY(date)=$day";
         $query = mysqli_query($conn, $sql);
         $number = 1;
         echo '
         <thead class="thead-dark">
+
             <tr>
-                <th style="text-align:center" scope="col" colspan="2">
+                <th >ลำดับที่</th>
+                <th >เวลา</th>
+                <th style="text-align:center" scope="col">
                     '.$ele_img.'
-                </th>
+                </th>  
             </tr>
         </thead>
         ';
@@ -195,7 +199,8 @@
             echo '<tbody>
             <tr scope="row" >
             <th scope="row" width="10%" >'.$number.'</th>
-            <td><img src= "uploads/'.$value["image"].'" width="20%" alt=""></td>
+            <td><?php echo test; ?></td>
+            <td><img class="zoom" src= "img/uploads/'.$value["image"].'" alt=""></td>
             </tr> </tbody>';
             ++$number;
         }
