@@ -367,8 +367,6 @@
     }
 
     if(isset($_POST['function']) == 'LineNoti'){
-        // $sql = "SELECT * FROM `tb_show` WHERE `date` = SUBSTRING(DATE_ADD(NOW(), INTERVAL -1 DAY), 1, 10)";
-        // $query = mysqli_query($conn, $sql);
 
             $token = "G0lqw73joxZ1Si2e4MuPOfb50puNSm3KyK3k1jlfpQr" ; // LINE Token
             //Message
