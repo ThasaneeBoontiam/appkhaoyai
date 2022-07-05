@@ -223,6 +223,7 @@
     }
 
     if(isset($_FILES['upload'])){
+
         $date = ($_POST['date']);
         $time = "{$_POST["time"]}น.";
         $province_id = ($_POST['province']);
@@ -280,6 +281,7 @@
                 $sql_add = "INSERT INTO `tb_show`(`id`, `name_user`, `agency`, `rank`, `date`, `time`, `province_name`, `area_name`, `subarea_name`, `num_ele`, `ele_name`, `location_in_x`, `location_in_y`, `location_out_x`, `location_out_y`, `location`, `no_damage`, `property`, `banana`, `sugarcane`, `sweetcorn`, `coconut`, `jackfruit`, `mak`, `other`, `location_damage_E`, `location_damage_N`)
                                         VALUES ( NULL, '{$_SESSION["fname"]} {$_SESSION["lname"]}', '{$_SESSION["agency"]}', '{$_SESSION["rank"]}', '$date', '$time', '$province', '$amphures', '$districts', '$num_ele', '$value', '$location_in_x', '$location_in_y', '$location_out_x', '$location_out_y', '$location', '{$_POST['text_1']}', '{$_POST['text_2']}', '{$_POST['text_3']}', '{$_POST['text_4']}', '{$_POST['text_5']}', '{$_POST['text_6']}', '{$_POST['text_7']}', '{$_POST['text_8']}', '{$_POST['text_9']}', '$y', '$x')";
                 mysqli_query($conn,$sql_add) or die ("Error in query: $sql_add " . mysqli_error());
+
                 $nameele .=" '$value' ";
                 $numele+=$num_ele;
                 
@@ -307,8 +309,8 @@
             $file_name = $_FILES['upload']['name'];
             $new_name = $file_name[$key];
             if(move_uploaded_file($_FILES['upload']['tmp_name'][$key],"img/uploads/".$new_name)){
-                    $sqlimage = "INSERT INTO `tb_image`(`id`, `name_ele`, `date`, `timeimg`, `image`)
-                                VALUES (NULL, '$nameele','$date','$time', '$new_name')";
+                $sqlimage = "INSERT INTO `tb_image`(`id`, `name_ele`, `date`, `timeimg`, `image`)
+                                    VALUES (NULL, $nameele,'{$_POST['date']}','$time', '$new_name')";
                 mysqli_query($conn, $sqlimage);
             }
         }
@@ -348,18 +350,36 @@
         $mymessage .= "{$_SESSION["fname"]} {$_SESSION["lname"]}\n";
         $mymessage .= "{$_SESSION["rank"]}\n";
         $mymessage .= "ผู้รายงาน\n";
-        $imageFile = new CURLFILE('img/uploads/2_4.png'); // Local Image file Path
+        // $imageFile = new CURLFILE('img/uploads/2_4.png'); // Local Image file Path
         // $sticker_package_id = '2';  // Package ID sticker
         // $sticker_id = '34';    // ID sticker
         echo $mymessage;
         $data = array (
-            'message' => $mymessage,
-            'imageFile' => $imageFile
+            'message' => $mymessage
             // 'stickerPackageId' => $sticker_package_id,
             // 'stickerId' => $sticker_id
         );
         
         line_notification($token,$data);
+
+        foreach($_FILES['upload']['tmp_name'] as $key => $value){
+            $file_name = $_FILES['upload']['name'];
+            $new_name = $file_name[$key];
+            if(move_uploaded_file($_FILES['upload']['tmp_name'][$key],"img/uploads/".$new_name)){
+                $sqlimage = "INSERT INTO `tb_image`(`id`, `name_ele`, `date`, `timeimg`, `image`)
+                                    VALUES (NULL, '$nameele','{$_POST['date']}','$time', '$new_name')";
+                mysqli_query($conn, $sqlimage);
+                print_r(mysqli_query($conn, $sqlimage));
+            }
+            $imageFile = new CURLFILE('img/uploads/'.$new_name.'');
+            $data = array (
+                'message' => "รูป",
+                'imageFile' => $imageFile
+                    // 'stickerPackageId' => $sticker_package_id,
+                    // 'stickerId' => $sticker_id
+            );
+            line_notification($token,$data);
+        }
 
         header("Location: add_data.php");
 
