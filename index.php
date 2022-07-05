@@ -391,8 +391,8 @@
             $token = "G0lqw73joxZ1Si2e4MuPOfb50puNSm3KyK3k1jlfpQr" ; // LINE Token
             //Message
             $mymessage = "\nเรียนหัวหน้าอุทยานแห่งชาติเขาใหญ่ \n\n"; //Set new line with '\n'
-            // $sql = "SELECT DISTINCT `date` FROM `tb_show` WHERE `date` = SUBSTRING(DATE_ADD(NOW(), INTERVAL -1 DAY), 1, 10)";
-            $sql = "SELECT DISTINCT `date` FROM `tb_show` WHERE `date` = '2022-07-03'";
+            $sql = "SELECT DISTINCT `date` FROM `tb_show` WHERE `date` = SUBSTRING(DATE_ADD(NOW(), INTERVAL -1 DAY), 1, 10)";
+            // $sql = "SELECT DISTINCT `date` FROM `tb_show` WHERE `date` = '2022-07-03'";
             $resday = mysqli_query($conn, $sql);
             $resday = mysqli_fetch_assoc($resday);
 
