@@ -340,7 +340,11 @@
             $coordinates = "พิกัดความเสียหาย $x, $y";
         }
         
-        $token = "G0lqw73joxZ1Si2e4MuPOfb50puNSm3KyK3k1jlfpQr" ; // LINE Token
+        $sqllinenoti = "SELECT * FROM `tb_linetoken` WHERE `id` = 1";
+        $resLineToken = mysqli_query($conn, $sqllinenoti);
+        $resLineToken = mysqli_fetch_assoc($resLineToken);
+        
+        $token = $resLineToken['Line_Token'] ; // LINE Token
         //Message
         $mymessage = "\nเรียนหัวหน้าอุทยานแห่งชาติเขาใหญ่\n\n"; //Set new line with '\n'
         $mymessage .= "หน่วย {$_SESSION["agency"]} เมื่อวันที่ $date ออกตรวจเฝ้าระวังและผลักดันช้างป่าออกหากินออกนอกเขตพื้นที่อุทยานแห่งชาติเขาใหญ่";
@@ -353,7 +357,7 @@
         // $imageFile = new CURLFILE('img/uploads/2_4.png'); // Local Image file Path
         // $sticker_package_id = '2';  // Package ID sticker
         // $sticker_id = '34';    // ID sticker
-        echo $mymessage;
+        // echo $mymessage;
         $data = array (
             'message' => $mymessage
             // 'stickerPackageId' => $sticker_package_id,
@@ -388,7 +392,11 @@
 
     if(isset($_POST['function']) == 'LineNoti'){
 
-            $token = "G0lqw73joxZ1Si2e4MuPOfb50puNSm3KyK3k1jlfpQr" ; // LINE Token
+            $sqllinenoti = "SELECT * FROM `tb_linetoken` WHERE `id` = 2";
+            $resLineToken = mysqli_query($conn, $sqllinenoti);
+            $resLineToken = mysqli_fetch_assoc($resLineToken);
+            
+            $token = $resLineToken['Line_Token'] ; // LINE Token
             //Message
             $mymessage = "\nเรียนหัวหน้าอุทยานแห่งชาติเขาใหญ่ \n\n"; //Set new line with '\n'
             $sql = "SELECT DISTINCT `date` FROM `tb_show` WHERE `date` = SUBSTRING(DATE_ADD(NOW(), INTERVAL -1 DAY), 1, 10)";

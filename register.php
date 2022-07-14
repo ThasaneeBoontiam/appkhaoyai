@@ -2,7 +2,7 @@
     require_once "includes/connect.php";
     
 
-    $username = $password = $Firstname = $Lastname = $Email = $Agency = $Rank = $confirm_password = "";
+    $username = $password = $Firstname = $Lastname = $Agency = $Rank = $confirm_password = "";
     $username_err = $password_err = $confirm_password_err = "";
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -10,9 +10,11 @@
         // Validate username
         if(empty(trim($_POST["Usertname"]))){
             $username_err = "Please enter a username.";
-        } elseif(!preg_match('/^[a-zA-Z0-9_]+$/', trim($_POST["Usertname"]))){
-            $username_err = "Username can only contain letters, numbers, and underscores.";
-        } else{
+        }
+        // elseif(!preg_match('/^[a-zA-Z0-9_]+$/', trim($_POST["Usertname"]))){
+        //     $username_err = "Username can only contain letters, numbers, and underscores.";
+        // }
+         else{
             // Prepare a select statement
             $sql = "SELECT id FROM tb_user WHERE UserName = ?";
             
@@ -67,14 +69,16 @@
 
             $Firstname =trim($_POST["Firstname"]);
             $Lastname = trim($_POST["Lastname"]);
-            $Email = trim($_POST["Email"]);
+            // $Email = trim($_POST["Email"]);
             $Agency = trim($_POST["Agency"]);
             $Rank = trim($_POST["Rank"]);
             // $password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
 
             // Prepare an insert statement
-            $sql = "INSERT INTO tb_user (First_name, Last_name, UserName, Email, Password, Agency, Rank, Status) VALUES ('$Firstname', '$Lastname', '$username', '$Email', '$password', '$Agency', '$Rank', 'User')";
+            $sql = "INSERT INTO tb_user (First_name, Last_name, UserName, Password, Agency, Rank, Status) VALUES ('$Firstname', '$Lastname', '$username', '$password', '$Agency', '$Rank', 'User')";
             mysqli_query($conn, $sql);
+
+            // $sql = "INSERT INTO `tb_user`(`First_name`, `Last_name`, `UserName`, `Password`, `Agency`, `Rank`, `Status`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6],[value-7],[value-8])"
 
             header("location: login.php");
             

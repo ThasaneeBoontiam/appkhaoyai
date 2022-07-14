@@ -5,17 +5,8 @@
 require_once("includes/connect.php");
 include('includes/header.php');
 include('includes/navbar.php');
-$sql = "SELECT * FROM `tb_user`";
+$sql = "SELECT * FROM `tb_linetoken`";
 $result = mysqli_query($conn,$sql);
-
-if(isset($_GET['del'])){
-    $User_ID = $_GET['del'];
-    $sqldel="delete from `tb_user` where id= '$User_ID'";
-	$result1=mysqli_query($conn,$sqldel);
-
-    header("location:user.php");
-    exit();
-}
 ?>
 
 <div class = "container">
@@ -26,7 +17,7 @@ if(isset($_GET['del'])){
     </button> -->
     
 
-    <div id="displayDataTable">dd</div>
+    <div id="displayLineNoti">dd</div>
 </p>
 </div>
 
@@ -58,27 +49,24 @@ if(isset($_GET['del'])){
 
 
 <!-- update Modal -->
-<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="updateLineNoti" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Update Status</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Update Elephant</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="form-group">
-            <label for="completename">ชื่อ-นามสกุล</label>
+            <label for="completename">Token_Name</label>
             <input type="name" class="form-control" id="updatename" placeholder="Enter name elephant" readonly>
         </div>
         <div class="form-group">
-            <label for="completename">สถานะ</label>
+            <label for="completename">Line_Token</label>
             <!-- <input type="name" class="form-control" id="updatstatus" placeholder="Enter status"> -->
-            <select name="" class="form-control " id="updatestatus">
-                <option value="Admin">Admin</option>
-                <option value="User">User</option>
-			</select>
+            <input type="text" class="form-control" name="updateLineToken" id="updateLineToken" placeholder="Enter LineToken">
         </div>
       </div>
       <div class="modal-footer">
@@ -119,11 +107,11 @@ if(isset($_GET['del'])){
             url:"display_user.php",
             type:'post',
             data:{
-                displaySend:displayData
+                displayLineNoti:displayData
             },
             success:function(data,status) {
                 // console.log(status);
-                $('#displayDataTable').html(data);
+                $('#displayLineNoti').html(data);
             }
         })
     }
@@ -146,26 +134,26 @@ if(isset($_GET['del'])){
     function GetDetails(updateid){
         $('#hiddendata').val(updateid);
 
-        $.post("display_user.php",{updateid:updateid},
+        $.post("display_user.php",{updateLineToken:updateid},
         function(data,status){
             var userid=JSON.parse(data);
-            $('#updatename').val(userid.First_name+" "+userid.Last_name);
-            $('#updatestatus').val(userid.Status);
+            $('#updatename').val(userid.Token_Name);
+            $('#updateLineToken').val(userid.Line_Token);
         });
-        $('#updateModal').modal('show');
+        $('#updateLineNoti').modal('show');
         
     }
 
     //onclick update event function
     function updateDetaisls() {
-        var updatestatus=$('#updatestatus').val();
+        var updatestatus=$('#updateLineToken').val();
         var hiddendata=$('#hiddendata').val();
         
         $.post("display_user.php",{
             updatestatus:updatestatus,
-            hiddendata:hiddendata
+            updateLinenoti:hiddendata
         },function(data,status){
-            $('#updateModal').modal('hide');
+            $('#updateLineNoti').modal('hide');
             displayData();
         });
     }

@@ -53,6 +53,14 @@
 
 <!-- Nav Item - Dashboard -->
 <li class="nav-item active">
+    <a class="nav-link" href="editlinenoti.php">
+      <i class='bx bxs-notification'></i>
+        <span class="links_name">การจัดการ Token Line</span>
+    </a>
+</li>
+
+<!-- Nav Item - Dashboard -->
+<li class="nav-item active">
     <a class="nav-link" href="manageuser.php">
         <i class='bx bx-file'></i>
         <span class="links_name">การจัดการผู้ใช้งาน</span>
